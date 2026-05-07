@@ -1,92 +1,44 @@
-# WordlyWander
+# [Project name]
 
-A family travel blog website focused on exploring Bangladesh. WordlyWander chronicles stories from a writing family that roams — featuring destination guides, blog posts, a photo journal, and an about page.
+_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/worldly-wander run dev` — run the frontend (reads PORT env)
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema to Neon
-- Required env: `DATABASE_URL` — Neon PostgreSQL connection string
-- Required env: `SESSION_SECRET` — random secret for JWT signing
-- Required env: `PORT=3000`, `BASE_PATH=/` — for local dev
-
-## Vercel Deployment
-
-Files added for Vercel:
-- `vercel.json` — install/build/output config + rewrites
-- `api/index.ts` — serverless function entry point (re-exports Express app)
-- `build-vercel.mjs` — builds frontend for Vercel
-
-**Vercel project settings** (set in dashboard):
-- Framework: Other
-- Install Command: `corepack enable && pnpm install --no-frozen-lockfile`
-- Build Command: `node build-vercel.mjs`
-- Output Directory: `artifacts/worldly-wander/dist/public`
-
-**Vercel environment variables** (set in dashboard):
-- `DATABASE_URL` — Neon connection string (`postgresql://...@...neon.tech/neondb?sslmode=require`)
-- `SESSION_SECRET` — any long random string
-- `NODE_ENV` — `production`
-
-**After first deploy, push DB schema to Neon:**
-```
-DATABASE_URL=your_neon_url pnpm --filter @workspace/db run push
-```
+- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
+- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- Frontend: React + Vite + Tailwind CSS + Framer Motion
-- Routing: Wouter
-- UI: shadcn/ui components
-- API: Express 5 (api-server)
-- DB: PostgreSQL + Drizzle ORM (api-server)
-- Build: esbuild (CJS bundle for api-server)
+- API: Express 5
+- DB: PostgreSQL + Drizzle ORM
+- Validation: Zod (`zod/v4`), `drizzle-zod`
+- API codegen: Orval (from OpenAPI spec)
+- Build: esbuild (CJS bundle)
 
 ## Where things live
 
-- `artifacts/worldly-wander/src/pages/` — all page components
-- `artifacts/worldly-wander/src/components/` — Navbar, Footer, BackToTop, StarRating
-- `artifacts/worldly-wander/src/contexts/` — ThemeContext, LanguageContext
-- `artifacts/worldly-wander/src/data/` — static JSON data (destinations, posts, photos)
-- `lib/api-spec/openapi.yaml` — API contract source of truth
-- `lib/db/src/schema/` — Drizzle DB schema
+_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
 
 ## Architecture decisions
 
-- Frontend-only (no backend for the blog itself) — all data lives in JSON files under `src/data/`
-- Theme (dark/light) stored in localStorage via ThemeContext
-- Language (English/Bengali) managed via React context with a strings object
-- Framer Motion for all scroll animations and page transitions
-- Wouter for client-side routing with BASE_URL support
+_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
 
 ## Product
 
-WordlyWander is a magazine-style travel blog with:
-1. Home — animated hero, featured destinations, latest posts, photo strip, newsletter
-2. Travel Bangladesh — filterable grid of 14 districts with type filters
-3. Destination Detail — hero, gallery lightbox, highlights, map embed, family rating, related destinations
-4. Blog (Scripts & Suitcases) — searchable, filterable post grid with social share
-5. Photo Journal (Postcards & Paragraphs) — masonry grid with full-screen lightbox
-6. Our Story — family bio, meaning of WordlyWander, Medium article links
+_Describe the high-level user-facing capabilities of this app once they exist._
 
 ## User preferences
 
-- Warm earthy palette: terracotta, forest green, cream, sandy beige
-- Fonts: Playfair Display (serif/headings) + Inter (body)
-- Dark/light mode toggle in navbar
-- Bengali/English language switcher in navbar
-- No emojis in UI (except the flag in language switcher)
+_Populate as you build — explicit user instructions worth remembering across sessions._
 
 ## Gotchas
 
-- Always add Google Fonts @import as the FIRST line in index.css before other @import statements
-- The WouterRouter uses `base={import.meta.env.BASE_URL.replace(/\/$/, "")}` — keep this
-- Unsplash image URLs use the format `https://images.unsplash.com/photo-{id}?w=800&q=80`
+_Populate as you build — sharp edges, "always run X before Y" rules._
 
 ## Pointers
 

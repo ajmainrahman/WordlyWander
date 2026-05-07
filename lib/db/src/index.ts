@@ -10,12 +10,7 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// Neon requires SSL in production. The URL may already include ?sslmode=require,
-// but we add ssl:true as a safe fallback for any PostgreSQL provider.
-export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
-});
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 export const db = drizzle(pool, { schema });
 
 export * from "./schema";
