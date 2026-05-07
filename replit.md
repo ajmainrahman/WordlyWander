@@ -9,7 +9,33 @@ A family travel blog website focused on exploring Bangladesh. WordlyWander chron
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- Required env: `DATABASE_URL` — Postgres connection string (for API server)
+- `pnpm --filter @workspace/db run push` — push DB schema to Neon
+- Required env: `DATABASE_URL` — Neon PostgreSQL connection string
+- Required env: `SESSION_SECRET` — random secret for JWT signing
+- Required env: `PORT=3000`, `BASE_PATH=/` — for local dev
+
+## Vercel Deployment
+
+Files added for Vercel:
+- `vercel.json` — install/build/output config + rewrites
+- `api/index.ts` — serverless function entry point (re-exports Express app)
+- `build-vercel.mjs` — builds frontend for Vercel
+
+**Vercel project settings** (set in dashboard):
+- Framework: Other
+- Install Command: `corepack enable && pnpm install --no-frozen-lockfile`
+- Build Command: `node build-vercel.mjs`
+- Output Directory: `artifacts/worldly-wander/dist/public`
+
+**Vercel environment variables** (set in dashboard):
+- `DATABASE_URL` — Neon connection string (`postgresql://...@...neon.tech/neondb?sslmode=require`)
+- `SESSION_SECRET` — any long random string
+- `NODE_ENV` — `production`
+
+**After first deploy, push DB schema to Neon:**
+```
+DATABASE_URL=your_neon_url pnpm --filter @workspace/db run push
+```
 
 ## Stack
 

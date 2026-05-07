@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "types": ["node"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": ["."],
+  "references": [
+    { "path": "../artifacts/api-server" },
+    { "path": "../lib/db" },
+    { "path": "../lib/api-zod" }
+  ]
+}
