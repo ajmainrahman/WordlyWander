@@ -28115,7 +28115,7 @@ var require_pino = __commonJS({
     };
     var normalize = createArgsNormalizer(defaultOptions);
     var serializers = Object.assign(/* @__PURE__ */ Object.create(null), stdSerializers);
-    function pino2(...args) {
+    function pino(...args) {
       const instance = {};
       const { opts, stream } = normalize(instance, caller(), ...args);
       if (opts.level && typeof opts.level === "string" && DEFAULT_LEVELS[opts.level.toLowerCase()] !== void 0) opts.level = opts.level.toLowerCase();
@@ -28217,7 +28217,7 @@ var require_pino = __commonJS({
       instance[setLevelSym](level);
       return instance;
     }
-    module.exports = pino2;
+    module.exports = pino;
     module.exports.destination = (dest = process.stdout.fd) => {
       if (typeof dest === "object") {
         dest.dest = normalizeDestFileDescriptor(dest.dest || process.stdout.fd);
@@ -28233,8 +28233,8 @@ var require_pino = __commonJS({
     module.exports.stdTimeFunctions = Object.assign({}, time4);
     module.exports.symbols = symbols;
     module.exports.version = version3;
-    module.exports.default = pino2;
-    module.exports.pino = pino2;
+    module.exports.default = pino;
+    module.exports.pino = pino;
   }
 });
 
@@ -28266,7 +28266,7 @@ var require_get_caller_file = __commonJS({
 var require_logger = __commonJS({
   "node_modules/.pnpm/pino-http@10.5.0/node_modules/pino-http/logger.js"(exports, module) {
     "use strict";
-    var { pino: pino2, symbols: { stringifySym, chindingsSym } } = require_pino();
+    var { pino, symbols: { stringifySym, chindingsSym } } = require_pino();
     var serializers = require_pino_std_serializers();
     var getCallerFile = require_get_caller_file();
     var startTime = /* @__PURE__ */ Symbol("startTime");
@@ -28444,7 +28444,7 @@ var require_logger = __commonJS({
         if (opts.transport && !opts.transport.caller) {
           opts.transport.caller = getCallerFile();
         }
-        logger2 = pino2(opts, stream);
+        logger2 = pino(opts, stream);
       }
       return logger2;
     }
@@ -60058,22 +60058,16 @@ router9.use("/admin/gallery", gallery_default2);
 var routes_default = router9;
 
 // artifacts/api-server/src/lib/logger.ts
-var import_pino = __toESM(require_pino(), 1);
 var isProduction = process.env.NODE_ENV === "production";
-var logger = (0, import_pino.default)({
-  level: process.env.LOG_LEVEL ?? "info",
-  redact: [
-    "req.headers.authorization",
-    "req.headers.cookie",
-    "res.headers['set-cookie']"
-  ],
-  ...isProduction ? {} : {
-    transport: {
-      target: "pino-pretty",
-      options: { colorize: true }
-    }
-  }
-});
+var logger = {
+  info: (...args) => console.log("[INFO]", ...args),
+  error: (...args) => console.error("[ERROR]", ...args),
+  warn: (...args) => console.warn("[WARN]", ...args),
+  debug: (...args) => console.log("[DEBUG]", ...args),
+  fatal: (...args) => console.error("[FATAL]", ...args),
+  child: () => logger,
+  level: "info"
+};
 
 // artifacts/api-server/src/app.ts
 var app = (0, import_express10.default)();
@@ -60406,5 +60400,3 @@ cookie-parser/index.js:
 safe-buffer/index.js:
   (*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> *)
 */
-
-export default app;
