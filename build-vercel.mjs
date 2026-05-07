@@ -1,25 +1,16 @@
-/**
- * Vercel build script.
- * Builds the frontend. The API function (api/index.ts) is compiled
- * automatically by Vercel's @vercel/node runtime.
- */
+import { build } from "esbuild";
+import { copyFileSync, mkdirSync } from "fs";
 
-import { execSync } from "node:child_process";
-
-const run = (cmd, env = {}) => {
-  console.log(`\n▶ ${cmd}\n`);
-  execSync(cmd, {
-    stdio: "inherit",
-    env: { ...process.env, ...env },
-  });
-};
-
-// Build the React frontend.
-// PORT and BASE_PATH must be set; vite.config.ts reads them.
-run("pnpm --filter @workspace/worldly-wander run build", {
-  NODE_ENV: "production",
-  BASE_PATH: "/",
-  PORT: "3000",
+// Bundle the API into a single CJS file for Vercel
+await build({
+  entryPoints: ["api/index.ts"],
+  bundle: true,
+  platform: "node",
+  target: "node20",
+  format: "cjs",
+  outfile: "api/index.js",
+  external: ["pg-native"],
+  sourcemap: false,
 });
 
-console.log("\n✓ Vercel build complete.\n");
+console.log("✅ Vercel API bundle complete");
