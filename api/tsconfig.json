@@ -3,8 +3,8 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "noEmitOnError": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false
+    "module": "esnext",
+    "moduleResolution": "bundler"
   },
   "include": ["index.ts"]
 }
