@@ -24,7 +24,7 @@ router.get("/:slug", async (req, res) => {
       .from(destinationsTable)
       .where(eq(destinationsTable.slug, req.params.slug))
       .limit(1);
-    if (!dest) {
+    if (!dest || !dest.published) {
       res.status(404).json({ error: "Not found" });
       return;
     }
