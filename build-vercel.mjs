@@ -1,7 +1,5 @@
 import { build } from "esbuild";
-import { copyFileSync, mkdirSync } from "fs";
 
-// Bundle the API into a single CJS file for Vercel
 await build({
   entryPoints: ["api/index.ts"],
   bundle: true,
@@ -9,7 +7,7 @@ await build({
   target: "node20",
   format: "cjs",
   outfile: "api/index.js",
-  external: ["pg-native"],
+  external: ["pg-native", "dotenv", "dotenv/config"],
   sourcemap: false,
 });
 
