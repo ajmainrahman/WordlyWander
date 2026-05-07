@@ -1,0 +1,25 @@
+uploads = []
+
+[[generated]]
+id = "RqoF7Sc2hQiItgkXCdfdA"
+uri = "file://artifacts/worldly-wander/public/logo-girl.png"
+type = "image"
+title = "girl travel food logo"
+
+[[generated]]
+id = "bZt-NxI8XZ07qkMu7UmQp"
+uri = "file://artifacts/worldly-wander/public/logo-boy.png"
+type = "image"
+title = "boy travel food logo"
+
+[[outputs]]
+id = "82DTyENydYwkGktYDHzne"
+uri = "file://artifacts/worldly-wander/public/logo-girl.png"
+type = "image"
+title = "Logo — Girl (travel + food)"
+
+[[outputs]]
+id = "HtJidc_EOGFTI0jExKvrG"
+uri = "file://artifacts/worldly-wander/public/logo-boy.png"
+type = "image"
+title = "Logo — Boy (travel + food)"

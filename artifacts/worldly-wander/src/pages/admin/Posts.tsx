@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Pencil, Trash2, Eye, EyeOff, X, Check } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import { adminFetchPosts, adminCreatePost, adminUpdatePost, adminDeletePost, type BlogPost } from "@/lib/api";
 
 const EMPTY: Partial<BlogPost> = {
@@ -160,8 +161,13 @@ export default function AdminPosts() {
                 )}
 
                 <Field label="Content">
-                  <textarea value={editing.content ?? ""} onChange={(e) => setEditing((v) => ({ ...v!, content: e.target.value }))}
-                    data-testid="input-post-content" rows={12} placeholder="Write your post here..." className={`${inputCls} resize-y min-h-40`} />
+                  <div data-testid="input-post-content">
+                    <RichTextEditor
+                      value={editing.content ?? ""}
+                      onChange={(html) => setEditing((v) => ({ ...v!, content: html }))}
+                      placeholder="Write your post here..."
+                    />
+                  </div>
                 </Field>
 
                 <label className="flex items-center gap-3 cursor-pointer" data-testid="toggle-post-published">

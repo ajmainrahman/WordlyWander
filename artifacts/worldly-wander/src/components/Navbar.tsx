@@ -45,9 +45,23 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" data-testid="link-logo">
-            <span className="font-serif text-2xl font-bold text-primary cursor-pointer tracking-tight">
-              WordlyWander
-            </span>
+            <div className="flex items-center gap-2.5 cursor-pointer group">
+              <div className="flex items-center -space-x-1">
+                <img
+                  src="/logo-girl.png"
+                  alt="girl logo"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-background group-hover:scale-105 transition-transform"
+                />
+                <img
+                  src="/logo-boy.png"
+                  alt="boy logo"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-background group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <span className="font-serif text-2xl font-bold text-primary tracking-tight">
+                WordlyWander
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Links */}
