@@ -128,13 +128,30 @@ var insertNewsletterSubscriberSchema = createInsertSchema4(newsletterSubscribers
 
 // lib/db/src/index.ts
 var { Pool } = pg;
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?"
-  );
+var _pool = null;
+var _db = null;
+function getConnection() {
+  if (_db) return _db;
+  if (!process.env.DATABASE_URL) {
+    throw new Error(
+      "DATABASE_URL must be set. Did you forget to provision a database?"
+    );
+  }
+  _pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  _db = drizzle(_pool, { schema: schema_exports });
+  return _db;
 }
-var pool = new Pool({ connectionString: process.env.DATABASE_URL });
-var db = drizzle(pool, { schema: schema_exports });
+var db = new Proxy({}, {
+  get(_target, prop) {
+    return getConnection()[prop];
+  }
+});
+var pool = new Proxy({}, {
+  get(_target, prop) {
+    if (!_pool) getConnection();
+    return _pool[prop];
+  }
+});
 
 // artifacts/api-server/src/routes/posts.ts
 import { eq, desc } from "drizzle-orm";
