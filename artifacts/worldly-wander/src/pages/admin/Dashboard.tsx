@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { FileText, MapPin, Image, List } from "lucide-react";
+import { FileText, MapPin, Image } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { adminFetchPosts, adminFetchDestinations, adminFetchGallery } from "@/lib/api";
 
@@ -32,14 +32,6 @@ export default function AdminDashboard() {
       icon: Image,
       href: "/admin/gallery",
       color: "bg-accent text-accent-foreground",
-    },
-    {
-      label: "Bucket List",
-      value: "—",
-      published: null,
-      icon: List,
-      href: "/admin/bucket-list",
-      color: "bg-muted text-muted-foreground",
     },
   ];
 
