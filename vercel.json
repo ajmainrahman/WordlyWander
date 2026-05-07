@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "installCommand": "corepack enable && pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm --filter @workspace/worldly-wander run build && node build-vercel.mjs",
+  "buildCommand": "node build-vercel.mjs",
   "outputDirectory": "artifacts/worldly-wander/dist/public",
   "framework": null,
   "env": {
