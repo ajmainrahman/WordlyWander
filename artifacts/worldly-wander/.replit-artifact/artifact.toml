@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "WordlyWander"
+version = "1.0.0"
+id = "artifacts/worldly-wander"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22076
+
+[services.development]
+run = "pnpm --filter @workspace/worldly-wander run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/worldly-wander", "run", "build" ]
+publicDir = "artifacts/worldly-wander/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22076"
+BASE_PATH = "/"

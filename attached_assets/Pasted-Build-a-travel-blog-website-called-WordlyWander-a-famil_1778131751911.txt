@@ -1,0 +1,61 @@
+Build a travel blog website called "WordlyWander" — a family travel blog focused on exploring Bangladesh. The tagline is: "Wordly + Wander — stories from a writing family that roams."
+
+DESIGN:
+- Warm, earthy color palette (terracotta, forest green, cream, sandy beige)
+- Clean, magazine-style layout with large hero images
+- Mobile-responsive design
+- Custom fonts: a serif for headings (like Playfair Display) and sans-serif for body (like Inter)
+
+PAGES & SECTIONS:
+
+1. HOME PAGE
+   - Full-width hero banner with animated tagline
+   - Featured destinations grid (card layout with photo, title, short description)
+   - Latest blog posts section ("Scripts & Suitcases")
+   - Photo highlights strip ("Postcards & Paragraphs")
+   - Newsletter signup bar ("Join our wander — get new stories in your inbox")
+
+2. TRAVEL BANGLADESH PAGE
+   - Interactive clickable map of Bangladesh with highlighted districts
+   - Each district card shows: cover photo, region name, short teaser, and a "Read More" button
+   - Filter bar: filter destinations by type (Nature, City, Heritage, Beach, Hill Tracts)
+   - Districts to include: Sylhet, Rangamati, Cox's Bazar, Chittagong, Rajshahi, Dhaka, Manikganj, Natore, Brahmanbaria, Noakhali, Dinajpur, Narsingdi, Tangail, Gazipur
+
+3. INDIVIDUAL DESTINATION PAGE (template)
+   - Hero image + destination title
+   - "Best Time to Visit" badge
+   - Travel highlights list
+   - Photo gallery with lightbox popup
+   - Embedded Google Map
+   - "Family-Friendly Rating" (star widget)
+   - Related destinations section
+
+4. BLOG PAGE ("Scripts & Suitcases")
+   - Card grid layout with post thumbnail, title, date, excerpt
+   - Category tags (Adventure, Food, Culture, Tips)
+   - Search bar to filter posts
+
+5. PHOTO JOURNAL ("Postcards & Paragraphs")
+   - Masonry photo grid organized by destination
+   - Click to open full-screen lightbox
+
+6. OUR STORY PAGE
+   - About the family with a warm photo
+   - The meaning of "WordlyWander" (Wordly = Word + Worldly, Wander = explore freely)
+   - Links to Medium articles
+
+7. FEATURES TO INCLUDE:
+   - Dark/light mode toggle
+   - Bengali 🇧🇩 / English language switcher
+   - Sticky navigation bar
+   - Smooth scroll animations
+   - Social share buttons on each post
+   - "Back to Top" button
+   - Footer with social links, site map, and copyright
+
+TECH STACK:
+- Frontend: React + Tailwind CSS
+- Routing: React Router
+- Use placeholder images from Unsplash (Bangladesh/travel themed)
+- No backend needed — use static JSON files for blog post and destination data
+- Keep all data in a /data folder as JSON for easy editing later
