@@ -1,0 +1,268 @@
+[
+  {
+    "id": "sylhet",
+    "name": "Sylhet",
+    "nameBn": "সিলেট",
+    "region": "Sylhet Division",
+    "type": "Nature",
+    "teaser": "Rolling green tea gardens, misty hills, and the sacred shrines of Hazrat Shah Jalal await in Bangladesh's lush northeast.",
+    "coverImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    "bestTimeToVisit": "October – March",
+    "highlights": ["Ratargul Swamp Forest", "Jaflong & Zero Point", "Srimangal Tea Estates", "Hazrat Shah Jalal Shrine", "Lalakhal River"],
+    "familyRating": 5,
+    "description": "Sylhet is a sensory feast — the smell of tea leaves at dawn, the sound of the Surma River, the sight of endless emerald hillsides. It's one of those places that feels like the world slowing down just for you.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80"
+    ]
+  },
+  {
+    "id": "rangamati",
+    "name": "Rangamati",
+    "nameBn": "রাঙামাটি",
+    "region": "Chittagong Hill Tracts",
+    "type": "Hill Tracts",
+    "teaser": "Shimmering Kaptai Lake, indigenous cultures, and dense forested hills make Rangamati one of Bangladesh's most breathtaking destinations.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+    "bestTimeToVisit": "November – February",
+    "highlights": ["Kaptai Lake", "Hanging Bridge", "Tribal Village Tours", "Shuvolong Waterfall", "Rajban Bihar Monastery"],
+    "familyRating": 4,
+    "description": "Nestled in the Chittagong Hill Tracts, Rangamati is a world apart — a tapestry of turquoise water, wooden stilt houses, and the vibrant traditions of the Chakma and Marma peoples.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80"
+    ]
+  },
+  {
+    "id": "coxs-bazar",
+    "name": "Cox's Bazar",
+    "nameBn": "কক্সবাজার",
+    "region": "Chittagong Division",
+    "type": "Beach",
+    "teaser": "The world's longest natural sea beach stretches 120 km — a golden canvas where the Bay of Bengal meets the monsoon sky.",
+    "coverImage": "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+    "bestTimeToVisit": "November – March",
+    "highlights": ["Laboni Beach", "Himchari National Park", "Inani Beach", "Maheshkhali Island", "Ramu Buddhist Vihara"],
+    "familyRating": 5,
+    "description": "Cox's Bazar is where Bangladesh lets its hair down. The beach is endless, the sunsets are amber fire, and the dried fish markets have a character all their own. Come at low tide and walk for what feels like forever.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+    ]
+  },
+  {
+    "id": "chittagong",
+    "name": "Chittagong",
+    "nameBn": "চট্টগ্রাম",
+    "region": "Chittagong Division",
+    "type": "City",
+    "teaser": "Bangladesh's port city hums with maritime energy, colonial history, and the world's most dramatic ship-breaking yards.",
+    "coverImage": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80",
+    "bestTimeToVisit": "October – February",
+    "highlights": ["Ship Breaking Yards", "Patenga Sea Beach", "Foy's Lake", "Ethnological Museum", "Sitakunda"],
+    "familyRating": 4,
+    "description": "Chittagong is Bangladesh's city of contradictions — colonial bungalows beside bustling port cranes, Buddhist pagodas beside tea stalls. It rewards the curious traveler who looks beyond the surface.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80",
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"
+    ]
+  },
+  {
+    "id": "rajshahi",
+    "name": "Rajshahi",
+    "nameBn": "রাজশাহী",
+    "region": "Rajshahi Division",
+    "type": "Heritage",
+    "teaser": "The Silk City sits beside the mighty Padma River, famed for its mangoes, terracotta temples, and the ancient ruins of Paharpur.",
+    "coverImage": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+    "bestTimeToVisit": "November – February",
+    "highlights": ["Somapura Mahavihara (Paharpur)", "Puthia Temple Complex", "Padma River Ghats", "Rajshahi Silk", "Varendra Research Museum"],
+    "familyRating": 4,
+    "description": "Rajshahi is the quiet achiever — a city of wide boulevards and scholars, where ancient terracotta temples crumble beautifully in mango groves. The Padma at dusk is something you will carry with you always.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80"
+    ]
+  },
+  {
+    "id": "dhaka",
+    "name": "Dhaka",
+    "nameBn": "ঢাকা",
+    "region": "Dhaka Division",
+    "type": "City",
+    "teaser": "The mega-city of 20 million souls — chaotic, vibrant, and utterly alive. Old Dhaka's rickshaw lanes hide 400 years of Mughal history.",
+    "coverImage": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+    "bestTimeToVisit": "October – February",
+    "highlights": ["Lalbagh Fort", "Ahsan Manzil (Pink Palace)", "Old Dhaka Food Tour", "National Museum", "Sadarghat River Terminal"],
+    "familyRating": 4,
+    "description": "Dhaka is a city that demands your full attention. The old city unfolds in layers — Mughal mosques, rickshaw art, the smell of biryani and jamdani silk. It's overwhelming and magnificent in equal measure.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80"
+    ]
+  },
+  {
+    "id": "manikganj",
+    "name": "Manikganj",
+    "nameBn": "মানিকগঞ্জ",
+    "region": "Dhaka Division",
+    "type": "Nature",
+    "teaser": "A river-threaded delta paradise just beyond Dhaka — rural Bangladesh at its most elemental, with boat journeys across braided waterways.",
+    "coverImage": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+    "bestTimeToVisit": "July – October (monsoon beauty)",
+    "highlights": ["Aricha Ghat", "Traditional Weaving Villages", "Padma-Jamuna Confluence", "Teota Zamindar Palace", "Boat Journeys"],
+    "familyRating": 4,
+    "description": "Manikganj is where you go to slow down. The rivers are everything here — children bathing, fishermen casting nets, ferries plying the monsoon flood. It's the Bangladesh that lives in poetry.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80"
+    ]
+  },
+  {
+    "id": "natore",
+    "name": "Natore",
+    "nameBn": "নাটোর",
+    "region": "Rajshahi Division",
+    "type": "Heritage",
+    "teaser": "Home to the legendary Rani Bhabani's palace and the Chalan Beel wetlands — a destination steeped in royal history and natural beauty.",
+    "coverImage": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+    "bestTimeToVisit": "October – March",
+    "highlights": ["Natore Rajbari", "Chalan Beel Wetlands", "Utara Gano Bhaban", "Halti Beel", "Traditional Nolen Gur"],
+    "familyRating": 3,
+    "description": "Natore is a place of quiet grandeur. The crumbling rajbari of Rani Bhabani is hauntingly beautiful, and the Chalan Beel — Bangladesh's largest wetland — transforms into a shimmering inland sea in the monsoon.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80"
+    ]
+  },
+  {
+    "id": "brahmanbaria",
+    "name": "Brahmanbaria",
+    "nameBn": "ব্রাহ্মণবাড়িয়া",
+    "region": "Chittagong Division",
+    "type": "Heritage",
+    "teaser": "The city of music and heritage on the banks of the Titas River — birthplace of classical musicians and home to ancient temples.",
+    "coverImage": "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+    "bestTimeToVisit": "October – February",
+    "highlights": ["Titas River", "Kuti Mosque", "Shrine of Shah Sufi Mohammad Kibria", "Meher Kuli Zamindar House", "Traditional Music Heritage"],
+    "familyRating": 3,
+    "description": "Brahmanbaria moves to its own rhythm — literally. This is the land that gave Bangladesh its classical music tradition. The Titas River meanders through memory and myth.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80"
+    ]
+  },
+  {
+    "id": "noakhali",
+    "name": "Noakhali",
+    "nameBn": "নোয়াখালী",
+    "region": "Chittagong Division",
+    "type": "Nature",
+    "teaser": "Where the Meghna meets the sea — a delta frontier of char islands, mangrove forests, and Gandhi's historic ashram.",
+    "coverImage": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
+    "bestTimeToVisit": "November – February",
+    "highlights": ["Gandhi Ashram", "Nijhum Dwip Island", "Char Islands by Boat", "Hatiya Island", "Mangrove Walks"],
+    "familyRating": 3,
+    "description": "Noakhali is the edge of the land — where Bangladesh literally ends and the Bay of Bengal begins. The char islands form and dissolve with the tides, and Nijhum Dwip is home to spotted deer and wading birds.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
+    ]
+  },
+  {
+    "id": "dinajpur",
+    "name": "Dinajpur",
+    "nameBn": "দিনাজপুর",
+    "region": "Rangpur Division",
+    "type": "Heritage",
+    "teaser": "Northern Bengal's jewel city — home to the magnificent Kantajew Temple, fragrant rice fields, and the festive Rash Mela fair.",
+    "coverImage": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+    "bestTimeToVisit": "October – March",
+    "highlights": ["Kantajew Temple", "Dinajpur Rajbari", "Ramsagar Lake", "Swapnapuri Theme Park", "Chinibari Terracotta"],
+    "familyRating": 4,
+    "description": "Dinajpur's Kantajew Temple is one of the finest terracotta monuments in Bangladesh — every brick tells a story from the Ramayana and Mahabharata. The paddy fields in November glow like hammered gold.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+    ]
+  },
+  {
+    "id": "narsingdi",
+    "name": "Narsingdi",
+    "nameBn": "নরসিংদী",
+    "region": "Dhaka Division",
+    "type": "Nature",
+    "teaser": "Close to Dhaka yet worlds away — a textile heartland of handloom weavers beside the meandering Meghna and Sitalakhya rivers.",
+    "coverImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+    "bestTimeToVisit": "October – March",
+    "highlights": ["Handloom Weaving Villages", "Ulipur Ghat", "River Boat Trips", "Wari-Bateshwar Heritage Site", "Meghna River"],
+    "familyRating": 3,
+    "description": "Narsingdi is the fabric of Bangladesh — literally. The district is laced with handloom workshops where weavers produce the jamdani and lungi cloth that clothe a nation. It's industry as art form.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"
+    ]
+  },
+  {
+    "id": "tangail",
+    "name": "Tangail",
+    "nameBn": "টাঙ্গাইল",
+    "region": "Dhaka Division",
+    "type": "Heritage",
+    "teaser": "The land of Tangail sarees and ancient zamindari mansions — where craft traditions and colonial-era architecture endure beautifully.",
+    "coverImage": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+    "bestTimeToVisit": "October – February",
+    "highlights": ["Tangail Saree Weaving", "Dhanbari Nawab Palace", "Atia Mosque", "Bhuapur River Ferry", "Madhupur Forest"],
+    "familyRating": 4,
+    "description": "Tangail is a study in slow time — the click of handlooms in dimly lit workshops, the crumbling columns of a nawab's palace, the mist over the Jamuna. This is the Bangladesh of memory and craft.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80"
+    ]
+  },
+  {
+    "id": "gazipur",
+    "name": "Gazipur",
+    "nameBn": "গাজীপুর",
+    "region": "Dhaka Division",
+    "type": "City",
+    "teaser": "Just beyond the capital, Gazipur blends industrial energy with pockets of surprising green — forests, eco-parks, and heritage mosques.",
+    "coverImage": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80",
+    "bestTimeToVisit": "November – March",
+    "highlights": ["Bhawal National Park", "Nuhash Polli (Humayun Ahmed's Estate)", "Gazipur Eco-Park", "Bhawal Rajbari", "Bali Mosque"],
+    "familyRating": 4,
+    "description": "Gazipur surprises the visitor expecting only factories — Bhawal National Park is a green lung, and Nuhash Polli, the estate of beloved novelist Humayun Ahmed, is a pilgrimage for every Bangladeshi reader.",
+    "gallery": [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80"
+    ]
+  }
+]
