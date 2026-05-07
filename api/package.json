@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "dependencies": {
+    "express": "*",
+    "cors": "*",
+    "cookie-parser": "*",
+    "pino": "*",
+    "pino-http": "*",
+    "pg": "*",
+    "drizzle-orm": "*",
+    "jsonwebtoken": "*",
+    "dotenv": "*"
+  }
+}
