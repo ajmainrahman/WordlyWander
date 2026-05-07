@@ -1,12 +1,14 @@
 import { build } from "esbuild";
 import { execSync } from "child_process";
+import { mkdirSync } from "fs";
 
 // Build frontend
-console.log("Building frontend...");
+console.log("⚙️  Building frontend...");
 execSync("pnpm --filter @workspace/worldly-wander run build", { stdio: "inherit" });
 
-// Bundle ONLY app.ts (not index.ts which calls listen()) into api/index.mjs
-console.log("Bundling API for Vercel...");
+// Bundle app.ts (NOT index.ts) into api/index.mjs for Vercel
+console.log("⚙️  Bundling Express app for Vercel...");
+mkdirSync("api", { recursive: true });
 await build({
   entryPoints: ["artifacts/api-server/src/app.ts"],
   bundle: true,
@@ -14,17 +16,8 @@ await build({
   target: "node20",
   format: "esm",
   outfile: "api/index.mjs",
-  external: [
-    "pg-native",
-    "dotenv",
-    "dotenv/config",
-    "pino",
-    "pino-http",
-  ],
+  external: ["pg-native"],
   sourcemap: false,
-  banner: {
-    js: "// Vercel serverless entry — exports Express app"
-  }
 });
 
-console.log("✅ Vercel bundle complete");
+console.log("✅ Build complete — api/index.mjs ready");
