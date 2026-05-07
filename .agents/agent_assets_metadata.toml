@@ -12,6 +12,12 @@ uri = "file://artifacts/worldly-wander/public/logo-boy.png"
 type = "image"
 title = "boy travel food logo"
 
+[[generated]]
+id = "jp7-HmzyiXlZZSwaNIk1L"
+uri = "file://artifacts/worldly-wander/public/logo-couple.png"
+type = "image"
+title = "couple traveler logo"
+
 [[outputs]]
 id = "82DTyENydYwkGktYDHzne"
 uri = "file://artifacts/worldly-wander/public/logo-girl.png"
@@ -23,3 +29,9 @@ id = "HtJidc_EOGFTI0jExKvrG"
 uri = "file://artifacts/worldly-wander/public/logo-boy.png"
 type = "image"
 title = "Logo — Boy (travel + food)"
+
+[[outputs]]
+id = "VpBRmZAJ1cXKMntBCCmCv"
+uri = "file://artifacts/worldly-wander/public/logo-couple.png"
+type = "image"
+title = "WordlyWander — Couple Traveler Logo"

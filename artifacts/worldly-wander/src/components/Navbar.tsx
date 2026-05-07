@@ -46,18 +46,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" data-testid="link-logo">
             <div className="flex items-center gap-2.5 cursor-pointer group">
-              <div className="flex items-center -space-x-1">
-                <img
-                  src="/logo-girl.png"
-                  alt="girl logo"
-                  className="w-9 h-9 rounded-full object-cover ring-2 ring-background group-hover:scale-105 transition-transform"
-                />
-                <img
-                  src="/logo-boy.png"
-                  alt="boy logo"
-                  className="w-9 h-9 rounded-full object-cover ring-2 ring-background group-hover:scale-105 transition-transform"
-                />
-              </div>
+              <img
+                src="/logo-couple.png"
+                alt="WordlyWander couple logo"
+                className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
+              />
               <span className="font-serif text-2xl font-bold text-primary tracking-tight">
                 WordlyWander
               </span>
