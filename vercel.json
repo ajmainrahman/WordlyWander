@@ -10,7 +10,7 @@
     "BASE_PATH": "/"
   },
   "functions": {
-    "api/index.js": {
+    "api/index.mjs": {
       "maxDuration": 30
     }
   },

@@ -1,14 +1,4 @@
 import { build } from "esbuild";
+import { copyFileSync, mkdirSync, existsSync } from "fs";
 
-await build({
-  entryPoints: ["api/index.ts"],
-  bundle: true,
-  platform: "node",
-  target: "node20",
-  format: "cjs",
-  outfile: "api/index.js",
-  external: ["pg-native", "dotenv", "dotenv/config"],
-  sourcemap: false,
-});
-
-console.log("✅ Vercel API bundle complete");
+console.log("✅ Frontend built, Vercel will handle api/index.mjs directly");
