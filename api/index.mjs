@@ -60406,3 +60406,5 @@ cookie-parser/index.js:
 safe-buffer/index.js:
   (*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> *)
 */
+
+export default app;
