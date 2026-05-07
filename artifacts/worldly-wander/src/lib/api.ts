@@ -72,6 +72,8 @@ export const fetchDestinations = () => apiFetch<Destination[]>("/api/destination
 export const fetchDestination = (slug: string) =>
   apiFetch<DestinationWithPhotos>(`/api/destinations/${slug}`);
 export const fetchGallery = () => apiFetch<GalleryPhoto[]>("/api/gallery");
+export const subscribe = (email: string) =>
+  apiFetch<{ ok: boolean }>("/api/subscribe", { method: "POST", body: JSON.stringify({ email }) });
 
 // ─── Admin fetchers ───────────────────────────────────────────────────────────
 

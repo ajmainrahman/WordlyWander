@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useLang } from "@/contexts/LanguageContext";
-import { fetchDestinations, fetchPosts, fetchGallery } from "@/lib/api";
+import { fetchDestinations, fetchPosts, fetchGallery, subscribe } from "@/lib/api";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -25,6 +25,7 @@ export default function Home() {
   const [heroIdx, setHeroIdx] = useState(0);
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subError, setSubError] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => setHeroIdx((i) => (i + 1) % HERO_IMAGES.length), 5000);
@@ -207,7 +208,20 @@ export default function Home() {
             {subscribed ? (
               <p className="text-xl font-semibold font-serif italic">Welcome aboard the journey.</p>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); if (email) setSubscribed(true); }} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" data-testid="form-newsletter">
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setSubError("");
+                  try {
+                    await subscribe(email);
+                    setSubscribed(true);
+                  } catch (err) {
+                    setSubError(err instanceof Error ? err.message : "Subscription failed. Please try again.");
+                  }
+                }}
+                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                data-testid="form-newsletter"
+              >
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.emailPlaceholder} required data-testid="input-newsletter-email"
                   className="flex-1 px-5 py-3 rounded-full bg-primary-foreground/15 border border-primary-foreground/30 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-primary-foreground/70 text-sm" />
                 <button type="submit" data-testid="button-newsletter-subscribe"
@@ -216,6 +230,7 @@ export default function Home() {
                 </button>
               </form>
             )}
+            {subError && <p className="mt-3 text-sm text-primary-foreground/70">{subError}</p>}
           </motion.div>
         </div>
       </section>
