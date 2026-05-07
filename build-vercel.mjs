@@ -1,8 +1,14 @@
 import { build } from "esbuild";
+import { execSync } from "child_process";
 import { mkdirSync } from "fs";
 
-mkdirSync("api", { recursive: true });
+// Step 1: Build frontend
+console.log("⚙️  Building frontend...");
+execSync("pnpm --filter @workspace/worldly-wander run build", { stdio: "inherit" });
 
+// Step 2: Bundle API
+console.log("⚙️  Bundling API...");
+mkdirSync("api", { recursive: true });
 await build({
   entryPoints: ["artifacts/api-server/src/app.ts"],
   bundle: true,
@@ -10,21 +16,8 @@ await build({
   target: "node20",
   format: "esm",
   outfile: "api/index.mjs",
-  packages: "external",
-  banner: {
-    js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);",
-  },
-  plugins: [
-    {
-      name: "workspace-resolver",
-      setup(build) {
-        build.onResolve({ filter: /^@workspace\// }, (args) => {
-          const pkg = args.path.replace("@workspace/", "");
-          return { path: new URL(`./lib/${pkg}/src/index.ts`, import.meta.url).pathname };
-        });
-      },
-    },
-  ],
+  external: ["pg-native"],
+  sourcemap: false,
 });
 
-console.log("Built api/index.mjs successfully");
+console.log("✅ Build complete");
