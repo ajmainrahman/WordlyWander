@@ -81,13 +81,6 @@ export default function Navbar() {
 
           {/* Controls */}
           <div className="flex items-center gap-3">
-            {!isAdminPath && (
-              <Link href="/admin" data-testid="link-admin">
-                <span className="hidden lg:inline-flex text-xs font-semibold px-2.5 py-1.5 rounded-full border border-border hover:bg-muted transition-colors text-foreground/60 hover:text-foreground cursor-pointer">
-                  Admin
-                </span>
-              </Link>
-            )}
             <button
               data-testid="button-lang-toggle"
               onClick={toggleLang}

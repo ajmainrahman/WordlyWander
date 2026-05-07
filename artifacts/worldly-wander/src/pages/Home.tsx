@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, ChevronDown } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useLang } from "@/contexts/LanguageContext";
 import { fetchDestinations, fetchPosts, fetchGallery, subscribe } from "@/lib/api";
+import TravelStats from "@/components/TravelStats";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -75,11 +76,16 @@ export default function Home() {
             </Link>
           </motion.div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {HERO_IMAGES.map((_, i) => (
-            <button key={i} data-testid={`button-hero-dot-${i}`} onClick={() => setHeroIdx(i)}
-              className={`w-2 h-2 rounded-full transition-all ${i === heroIdx ? "bg-white w-6" : "bg-white/50"}`} />
-          ))}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10">
+          <div className="flex gap-2">
+            {HERO_IMAGES.map((_, i) => (
+              <button key={i} data-testid={`button-hero-dot-${i}`} onClick={() => setHeroIdx(i)}
+                className={`w-2 h-2 rounded-full transition-all ${i === heroIdx ? "bg-white w-6" : "bg-white/50"}`} />
+            ))}
+          </div>
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+            <ChevronDown size={22} className="text-white/50" />
+          </motion.div>
         </div>
       </section>
 
@@ -197,6 +203,9 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* TRAVEL STATS */}
+      <TravelStats />
 
       {/* NEWSLETTER */}
       <section className="py-20 px-4 bg-primary text-primary-foreground" data-testid="section-newsletter">

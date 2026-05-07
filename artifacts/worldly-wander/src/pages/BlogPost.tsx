@@ -1,8 +1,15 @@
 import { useRoute, Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Clock, Facebook, Twitter, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Facebook, Twitter, Share2, BookOpen } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPost, fetchPosts, type BlogPost } from "@/lib/api";
+import AuthorCard from "@/components/AuthorCard";
+
+function readingTime(content: string): number {
+  const text = content.replace(/<[^>]*>/g, "");
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
 
 export default function BlogPostPage() {
   const [, params] = useRoute("/blog/:id");
@@ -54,8 +61,10 @@ export default function BlogPostPage() {
               <span className="inline-flex items-center gap-1 text-white/70 text-sm mb-3 cursor-pointer hover:text-white"><ArrowLeft size={14} /> Blog</span>
             </Link>
             <h1 className="font-serif text-3xl lg:text-5xl font-bold text-white leading-tight">{post.title}</h1>
-            <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
+            <div className="flex items-center gap-4 mt-4 text-white/60 text-sm flex-wrap">
               <span className="flex items-center gap-1"><Calendar size={13} /> {formatDate(post.createdAt)}</span>
+              <span className="flex items-center gap-1"><Clock size={13} /> {readingTime(post.content)} min read</span>
+              <span className="flex items-center gap-1"><BookOpen size={13} /> WordlyWander</span>
             </div>
           </motion.div>
         </div>
@@ -66,9 +75,11 @@ export default function BlogPostPage() {
           {post.excerpt && (
             <p className="text-xl leading-relaxed text-muted-foreground italic font-light border-l-4 border-primary pl-6 mb-8">{post.excerpt}</p>
           )}
-          <div className="prose prose-lg max-w-none text-foreground/85 leading-relaxed space-y-5" data-testid="text-post-content">
-            {post.content.split("\n\n").map((para, i) => <p key={i}>{para}</p>)}
-          </div>
+          <div
+            className="prose prose-lg dark:prose-invert max-w-none text-foreground/85 leading-relaxed prose-headings:font-serif prose-headings:text-foreground prose-a:text-primary prose-blockquote:border-primary prose-img:rounded-xl"
+            data-testid="text-post-content"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
 
           <div className="border-t border-border mt-12 pt-8">
             <p className="text-sm font-semibold text-muted-foreground mb-4 flex items-center gap-2"><Share2 size={14} /> Share this story</p>
@@ -83,6 +94,8 @@ export default function BlogPostPage() {
               </a>
             </div>
           </div>
+
+          <AuthorCard />
 
           {related.length > 0 && (
             <div className="mt-16" data-testid="section-related-posts">
