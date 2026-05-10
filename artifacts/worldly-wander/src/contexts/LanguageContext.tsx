@@ -30,14 +30,14 @@ interface Strings {
 
 const en: Strings = {
   home: "Home",
-  bangladesh: "Travel Bangladesh",
-  blog: "Scripts & Suitcases",
-  photos: "Postcards & Paragraphs",
+  bangladesh: "Travel",
+  blog: "Scripts",
+  photos: "Postcards",
   about: "Our Story",
   tagline: "Wordly + Wander — stories from a writing family that roams.",
   latestPosts: "Latest from the Blog",
   featuredDestinations: "Featured Destinations",
-  photoJournal: "Postcards & Paragraphs",
+  photoJournal: "Postcards",
   newsletterTitle: "Join our wander",
   newsletterSub: "Get new stories in your inbox",
   subscribe: "Subscribe",
@@ -56,9 +56,9 @@ const en: Strings = {
 
 const bn: Strings = {
   home: "হোম",
-  bangladesh: "বাংলাদেশ ভ্রমণ",
-  blog: "স্ক্রিপ্টস ও সুটকেস",
-  photos: "পোস্টকার্ড ও অনুচ্ছেদ",
+  bangladesh: "ভ্রমণ",
+  blog: "স্ক্রিপ্টস",
+  photos: "পোস্টকার্ড",
   about: "আমাদের গল্প",
   tagline: "ওয়ার্ডলি + ওয়ান্ডার — একটি লেখক পরিবারের ঘুরে বেড়ানোর গল্প।",
   latestPosts: "সর্বশেষ ব্লগ পোস্ট",

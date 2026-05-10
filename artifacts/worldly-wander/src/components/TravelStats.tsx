@@ -47,18 +47,18 @@ export default function TravelStats() {
   }, []);
 
   return (
-    <section ref={ref} className="py-20 bg-primary text-primary-foreground" data-testid="section-travel-stats">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-24 bg-muted/40 border-y border-border" data-testid="section-travel-stats">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <span className="text-xs font-semibold tracking-[0.3em] uppercase text-primary-foreground/60">By the Numbers</span>
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-primary-foreground mt-2">Our Journey So Far</h2>
+          <p className="text-[11px] font-medium tracking-[0.35em] uppercase text-primary/60 mb-3">By the Numbers</p>
+          <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">Our Journey So Far</h2>
         </motion.div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
           {STATS.map((stat, i) => (
             <StatCard key={stat.label} stat={stat} index={i} visible={visible} />
           ))}
@@ -72,19 +72,19 @@ function StatCard({ stat, index, visible }: { stat: ReturnType<typeof buildStats
   const count = useCountUp(stat.value, 1600, visible);
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       className="flex flex-col items-center gap-3"
     >
-      <div className="w-14 h-14 rounded-full bg-primary-foreground/15 flex items-center justify-center">
-        <stat.icon size={24} className="text-primary-foreground/80" />
+      <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+        <stat.icon size={18} className="text-primary" />
       </div>
-      <div className="font-serif text-4xl lg:text-5xl font-bold text-primary-foreground tabular-nums">
+      <div className="font-serif text-4xl lg:text-5xl font-semibold text-foreground tabular-nums">
         {count.toLocaleString()}{stat.suffix}
       </div>
-      <div className="text-sm text-primary-foreground/60 font-medium tracking-wide">{stat.label}</div>
+      <div className="text-[12px] text-muted-foreground font-medium tracking-wide uppercase">{stat.label}</div>
     </motion.div>
   );
 }
