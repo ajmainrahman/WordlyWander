@@ -64,6 +64,14 @@ export interface BucketListItem {
   createdAt: string;
 }
 
+export interface SiteStats {
+  posts: number;
+  destinations: number;
+  photos: number;
+  bucketTotal: number;
+  bucketDone: number;
+}
+
 // ─── Public fetchers ─────────────────────────────────────────────────────────
 
 export const fetchPosts = () => apiFetch<BlogPost[]>("/api/posts");
@@ -72,6 +80,9 @@ export const fetchDestinations = () => apiFetch<Destination[]>("/api/destination
 export const fetchDestination = (slug: string) =>
   apiFetch<DestinationWithPhotos>(`/api/destinations/${slug}`);
 export const fetchGallery = () => apiFetch<GalleryPhoto[]>("/api/gallery");
+export const fetchBucketList = () => apiFetch<BucketListItem[]>("/api/bucket-list");
+export const fetchStats = () => apiFetch<SiteStats>("/api/stats");
+export const fetchSiteSettings = () => apiFetch<Record<string, string>>("/api/site-settings");
 export const subscribe = (email: string) =>
   apiFetch<{ ok: boolean }>("/api/subscribe", { method: "POST", body: JSON.stringify({ email }) });
 
@@ -80,6 +91,8 @@ export const subscribe = (email: string) =>
 export const adminFetchPosts = () => apiFetch<BlogPost[]>("/api/admin/posts");
 export const adminFetchDestinations = () => apiFetch<Destination[]>("/api/admin/destinations");
 export const adminFetchGallery = () => apiFetch<GalleryPhoto[]>("/api/admin/gallery");
+export const adminFetchBucketList = () => apiFetch<BucketListItem[]>("/api/admin/bucket-list");
+export const adminFetchSiteSettings = () => apiFetch<Record<string, string>>("/api/admin/site-settings");
 
 export const adminLogin = (email: string, password: string) =>
   apiFetch<{ ok: boolean; email: string }>("/api/admin/auth/login", {
@@ -116,3 +129,34 @@ export const adminAddPhoto = (data: { imageUrl: string; caption?: string; destin
 
 export const adminDeletePhoto = (id: number) =>
   apiFetch<void>(`/api/admin/gallery/${id}`, { method: "DELETE" });
+
+export const adminCreateBucketListItem = (data: Partial<BucketListItem>) =>
+  apiFetch<BucketListItem>("/api/admin/bucket-list", { method: "POST", body: JSON.stringify(data) });
+
+export const adminUpdateBucketListItem = (id: number, data: Partial<BucketListItem>) =>
+  apiFetch<BucketListItem>(`/api/admin/bucket-list/${id}`, { method: "PUT", body: JSON.stringify(data) });
+
+export const adminDeleteBucketListItem = (id: number) =>
+  apiFetch<void>(`/api/admin/bucket-list/${id}`, { method: "DELETE" });
+
+export const adminSaveSiteSettings = (data: Record<string, string>) =>
+  apiFetch<{ ok: boolean }>("/api/admin/site-settings", { method: "PUT", body: JSON.stringify(data) });
+
+// ─── Storage ──────────────────────────────────────────────────────────────────
+
+export async function requestUploadUrl(file: File): Promise<{ uploadURL: string; objectPath: string }> {
+  return apiFetch("/api/storage/uploads/request-url", {
+    method: "POST",
+    body: JSON.stringify({ name: file.name, size: file.size, contentType: file.type }),
+  });
+}
+
+export async function uploadFileToStorage(file: File): Promise<string> {
+  const { uploadURL, objectPath } = await requestUploadUrl(file);
+  await fetch(uploadURL, {
+    method: "PUT",
+    headers: { "Content-Type": file.type },
+    body: file,
+  });
+  return `/api/storage${objectPath}`;
+}

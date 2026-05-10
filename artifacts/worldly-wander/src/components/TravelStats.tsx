@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Camera, FileText, Heart } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchStats, type SiteStats } from "@/lib/api";
 
 function useCountUp(target: number, duration = 1800, start = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (!start) return;
+    if (!start || target === 0) return;
     let startTime: number;
     const step = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
@@ -20,16 +22,21 @@ function useCountUp(target: number, duration = 1800, start = false) {
   return count;
 }
 
-const STATS = [
-  { icon: MapPin, label: "Destinations", value: 64, suffix: "+" },
-  { icon: FileText, label: "Stories Written", value: 120, suffix: "+" },
-  { icon: Camera, label: "Photos Captured", value: 3200, suffix: "+" },
-  { icon: Heart, label: "Years Travelling", value: 5, suffix: "" },
-];
+function buildStats(stats?: SiteStats) {
+  return [
+    { icon: MapPin, label: "Destinations", value: stats?.destinations ?? 0, suffix: stats?.destinations ? "+" : "" },
+    { icon: FileText, label: "Stories Written", value: stats?.posts ?? 0, suffix: stats?.posts ? "+" : "" },
+    { icon: Camera, label: "Photos Captured", value: stats?.photos ?? 0, suffix: stats?.photos ? "+" : "" },
+    { icon: Heart, label: "Bucket List Goals", value: stats?.bucketDone ?? 0, suffix: stats?.bucketTotal ? `/${stats.bucketTotal}` : "" },
+  ];
+}
 
 export default function TravelStats() {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { data: stats } = useQuery({ queryKey: ["stats"], queryFn: fetchStats, staleTime: 60_000 });
+
+  const STATS = buildStats(stats);
 
   useEffect(() => {
     const obs = new IntersectionObserver(([entry]) => {
@@ -61,7 +68,7 @@ export default function TravelStats() {
   );
 }
 
-function StatCard({ stat, index, visible }: { stat: typeof STATS[0]; index: number; visible: boolean }) {
+function StatCard({ stat, index, visible }: { stat: ReturnType<typeof buildStats>[0]; index: number; visible: boolean }) {
   const count = useCountUp(stat.value, 1600, visible);
   return (
     <motion.div

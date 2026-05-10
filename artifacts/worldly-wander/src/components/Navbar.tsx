@@ -24,6 +24,7 @@ export default function Navbar() {
     { href: "/bangladesh", label: t.bangladesh },
     { href: "/blog", label: t.blog },
     { href: "/photos", label: t.photos },
+    { href: "/bucket-list", label: "Bucket List" },
     { href: "/about", label: t.about },
   ];
 

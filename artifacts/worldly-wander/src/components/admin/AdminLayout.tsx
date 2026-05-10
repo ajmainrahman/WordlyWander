@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, FileText, MapPin, Image, LogOut } from "lucide-react";
+import { LayoutDashboard, FileText, MapPin, Image, LogOut, ListChecks, Settings } from "lucide-react";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 const NAV = [
@@ -7,6 +7,8 @@ const NAV = [
   { href: "/admin/posts", label: "Posts", icon: FileText },
   { href: "/admin/destinations", label: "Destinations", icon: MapPin },
   { href: "/admin/gallery", label: "Gallery", icon: Image },
+  { href: "/admin/bucket-list", label: "Bucket List", icon: ListChecks },
+  { href: "/admin/site-settings", label: "Site Settings", icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

@@ -15,11 +15,14 @@ import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import Photos from "@/pages/Photos";
 import About from "@/pages/About";
+import BucketList from "@/pages/BucketList";
 import AdminLogin from "@/pages/admin/Login";
 import AdminDashboard from "@/pages/admin/Dashboard";
 import AdminPosts from "@/pages/admin/Posts";
 import AdminDestinations from "@/pages/admin/Destinations";
 import AdminGallery from "@/pages/admin/Gallery";
+import AdminBucketList from "@/pages/admin/BucketList";
+import AdminSiteSettings from "@/pages/admin/SiteSettings";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -67,6 +70,9 @@ function Router() {
       <Route path="/about">
         <PublicLayout><About /></PublicLayout>
       </Route>
+      <Route path="/bucket-list">
+        <PublicLayout><BucketList /></PublicLayout>
+      </Route>
 
       {/* Admin routes — no PublicLayout (admin has its own layout) */}
       <Route path="/admin/login" component={AdminLogin} />
@@ -84,6 +90,12 @@ function Router() {
       </Route>
       <Route path="/admin/gallery">
         <AdminGuard><AdminGallery /></AdminGuard>
+      </Route>
+      <Route path="/admin/bucket-list">
+        <AdminGuard><AdminBucketList /></AdminGuard>
+      </Route>
+      <Route path="/admin/site-settings">
+        <AdminGuard><AdminSiteSettings /></AdminGuard>
       </Route>
 
       <Route component={NotFound} />
