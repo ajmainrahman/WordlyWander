@@ -3,7 +3,7 @@ import { execSync } from "child_process";
 import { mkdirSync } from "fs";
 
 console.log("⚙️  Building frontend...");
-execSync("pnpm --filter @workspace/wordly-wander run build", { stdio: "inherit" });
+execSync("pnpm --filter @workspace/worldly-wander run build", { stdio: "inherit" });
 
 console.log("⚙️  Bundling API for Vercel...");
 mkdirSync("api", { recursive: true });
