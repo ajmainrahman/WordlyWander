@@ -14,7 +14,7 @@ await build({
   target: "node20",
   format: "esm",
   outfile: "api/index.mjs",
-  external: ["pg-native"],
+  external: ["pg-native", "@google-cloud/storage"],
   sourcemap: false,
 });
 
