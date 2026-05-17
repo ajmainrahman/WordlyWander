@@ -23,3 +23,7 @@ const { readFileSync } = await import("fs");
 const bundle = readFileSync("api/index.js", "utf8");
 const hasExport = bundle.includes("module.exports");
 console.log(hasExport ? "✅ export default found" : "❌ WARNING: no export default!");
+
+// Flatten default export for Vercel
+import { appendFileSync } from "fs";
+appendFileSync("api/index.js", "\nmodule.exports = module.exports.default || module.exports;\n");
