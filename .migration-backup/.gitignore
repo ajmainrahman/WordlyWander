@@ -1,7 +1,7 @@
 # See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # compiled output
-dist
+# dist
 tmp
 out-tsc
 *.tsbuildinfo
@@ -47,3 +47,8 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Ignore dist folders except frontend build
+dist
+!artifacts/worldly-wander/dist
+!artifacts/worldly-wander/dist/**

@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Search, ArrowRight, Facebook, Twitter } from "lucide-react";
+import { Search, ArrowRight, Facebook, Twitter, Clock } from "lucide-react";
+
 import { useQuery } from "@tanstack/react-query";
 import { useLang } from "@/contexts/LanguageContext";
 import { fetchPosts, type BlogPost } from "@/lib/api";
+
+function readingTime(content: string): number {
+  const text = content.replace(/<[^>]*>/g, "");
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -80,7 +87,10 @@ export default function Blog() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   </div>
                   <div className="p-6">
-                    <p className="text-xs text-muted-foreground mb-3">{formatDate(post.createdAt)}</p>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+                      <span>{formatDate(post.createdAt)}</span>
+                      <span className="flex items-center gap-1"><Clock size={11} /> {readingTime(post.content ?? "")} min read</span>
+                    </div>
                     <h2 className="font-serif text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-3 line-clamp-2">{post.title}</h2>
                     <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-5">{post.excerpt}</p>
                     <div className="flex items-center justify-between">

@@ -5,14 +5,12 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const rawPort = process.env.PORT;
-// In Vercel build environment, PORT is not set — use a default for the build step.
-const port = rawPort ? Number(rawPort) : 3000;
+const port = rawPort ? Number(rawPort) : 22076;
 
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-// In Vercel build environment, BASE_PATH defaults to "/"
 const basePath = process.env.BASE_PATH ?? "/";
 
 export default defineConfig({

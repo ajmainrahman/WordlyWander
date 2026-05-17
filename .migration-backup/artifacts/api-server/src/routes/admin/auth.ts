@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { signAdminToken } from "../../lib/jwt";
-import { requireAdmin, type AuthedRequest } from "../../middlewares/auth";
+import { requireAdmin } from "../../middlewares/auth";
 
 const router = Router();
 
@@ -12,11 +12,9 @@ const COOKIE_OPTS = {
 };
 
 router.post("/login", (req, res) => {
-  const { email, password } = req.body as { email?: string; password?: string };
-
+  const { email, password } = req.body;
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
   const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-
   if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
     res.status(500).json({ error: "Admin credentials not configured" });
     return;
@@ -25,7 +23,6 @@ router.post("/login", (req, res) => {
     res.status(401).json({ error: "Invalid email or password" });
     return;
   }
-
   const token = signAdminToken({ sub: "admin", email });
   res.cookie("admin_token", token, COOKIE_OPTS);
   res.json({ ok: true, email });
@@ -36,7 +33,7 @@ router.post("/logout", (_req, res) => {
   res.json({ ok: true });
 });
 
-router.get("/me", requireAdmin, (req: AuthedRequest, res) => {
+router.get("/me", requireAdmin, (req, res) => {
   res.json({ email: req.admin?.email });
 });
 

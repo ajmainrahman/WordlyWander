@@ -20477,27 +20477,27 @@ var require_router = __commonJS({
     var slice = Array.prototype.slice;
     var flatten = Array.prototype.flat;
     var methods = METHODS.map((method) => method.toLowerCase());
-    module.exports = Router10;
+    module.exports = Router11;
     module.exports.Route = Route;
-    function Router10(options) {
-      if (!(this instanceof Router10)) {
-        return new Router10(options);
+    function Router11(options) {
+      if (!(this instanceof Router11)) {
+        return new Router11(options);
       }
       const opts = options || {};
-      function router10(req, res, next) {
-        router10.handle(req, res, next);
+      function router11(req, res, next) {
+        router11.handle(req, res, next);
       }
-      Object.setPrototypeOf(router10, this);
-      router10.caseSensitive = opts.caseSensitive;
-      router10.mergeParams = opts.mergeParams;
-      router10.params = {};
-      router10.strict = opts.strict;
-      router10.stack = [];
-      return router10;
+      Object.setPrototypeOf(router11, this);
+      router11.caseSensitive = opts.caseSensitive;
+      router11.mergeParams = opts.mergeParams;
+      router11.params = {};
+      router11.strict = opts.strict;
+      router11.stack = [];
+      return router11;
     }
-    Router10.prototype = function() {
+    Router11.prototype = function() {
     };
-    Router10.prototype.param = function param(name, fn) {
+    Router11.prototype.param = function param(name, fn) {
       if (!name) {
         throw new TypeError("argument name is required");
       }
@@ -20517,7 +20517,7 @@ var require_router = __commonJS({
       params.push(fn);
       return this;
     };
-    Router10.prototype.handle = function handle(req, res, callback) {
+    Router11.prototype.handle = function handle(req, res, callback) {
       if (!callback) {
         throw new TypeError("argument callback is required");
       }
@@ -20644,7 +20644,7 @@ var require_router = __commonJS({
         }
       }
     };
-    Router10.prototype.use = function use(handler) {
+    Router11.prototype.use = function use(handler) {
       let offset = 0;
       let path = "/";
       if (typeof handler !== "function") {
@@ -20677,7 +20677,7 @@ var require_router = __commonJS({
       }
       return this;
     };
-    Router10.prototype.route = function route(path) {
+    Router11.prototype.route = function route(path) {
       const route2 = new Route(path);
       const layer = new Layer(path, {
         sensitive: this.caseSensitive,
@@ -20692,7 +20692,7 @@ var require_router = __commonJS({
       return route2;
     };
     methods.concat("all").forEach(function(method) {
-      Router10.prototype[method] = function(path) {
+      Router11.prototype[method] = function(path) {
         const route = this.route(path);
         route[method].apply(route, slice.call(arguments, 1));
         return this;
@@ -20875,13 +20875,13 @@ var require_application = __commonJS({
     var compileTrust = require_utils3().compileTrust;
     var resolve = __require("node:path").resolve;
     var once = require_once();
-    var Router10 = require_router();
+    var Router11 = require_router();
     var slice = Array.prototype.slice;
     var flatten = Array.prototype.flat;
     var app2 = exports = module.exports = {};
     var trustProxyDefaultSymbol = "@@symbol:trust_proxy_default";
     app2.init = function init() {
-      var router10 = null;
+      var router11 = null;
       this.cache = /* @__PURE__ */ Object.create(null);
       this.engines = /* @__PURE__ */ Object.create(null);
       this.settings = /* @__PURE__ */ Object.create(null);
@@ -20890,13 +20890,13 @@ var require_application = __commonJS({
         configurable: true,
         enumerable: true,
         get: function getrouter() {
-          if (router10 === null) {
-            router10 = new Router10({
+          if (router11 === null) {
+            router11 = new Router11({
               caseSensitive: this.enabled("case sensitive routing"),
               strict: this.enabled("strict routing")
             });
           }
-          return router10;
+          return router11;
         }
       });
     };
@@ -20967,15 +20967,15 @@ var require_application = __commonJS({
       if (fns.length === 0) {
         throw new TypeError("app.use() requires a middleware function");
       }
-      var router10 = this.router;
+      var router11 = this.router;
       fns.forEach(function(fn2) {
         if (!fn2 || !fn2.handle || !fn2.set) {
-          return router10.use(path, fn2);
+          return router11.use(path, fn2);
         }
         debug(".use app under %s", path);
         fn2.mountpath = path;
         fn2.parent = this;
-        router10.use(path, function mounted_app(req, res, next) {
+        router11.use(path, function mounted_app(req, res, next) {
           var orig = req.app;
           fn2.handle(req, res, function(err) {
             Object.setPrototypeOf(req, orig.request);
@@ -23502,7 +23502,7 @@ var require_express = __commonJS({
     var EventEmitter = __require("node:events").EventEmitter;
     var mixin = require_merge_descriptors();
     var proto = require_application();
-    var Router10 = require_router();
+    var Router11 = require_router();
     var req = require_request();
     var res = require_response();
     exports = module.exports = createApplication;
@@ -23524,8 +23524,8 @@ var require_express = __commonJS({
     exports.application = proto;
     exports.request = req;
     exports.response = res;
-    exports.Route = Router10.Route;
-    exports.Router = Router10;
+    exports.Route = Router11.Route;
+    exports.Router = Router11;
     exports.json = bodyParser.json;
     exports.raw = bodyParser.raw;
     exports.static = require_serve_static();
@@ -28115,7 +28115,7 @@ var require_pino = __commonJS({
     };
     var normalize = createArgsNormalizer(defaultOptions);
     var serializers = Object.assign(/* @__PURE__ */ Object.create(null), stdSerializers);
-    function pino(...args) {
+    function pino2(...args) {
       const instance = {};
       const { opts, stream } = normalize(instance, caller(), ...args);
       if (opts.level && typeof opts.level === "string" && DEFAULT_LEVELS[opts.level.toLowerCase()] !== void 0) opts.level = opts.level.toLowerCase();
@@ -28217,7 +28217,7 @@ var require_pino = __commonJS({
       instance[setLevelSym](level);
       return instance;
     }
-    module.exports = pino;
+    module.exports = pino2;
     module.exports.destination = (dest = process.stdout.fd) => {
       if (typeof dest === "object") {
         dest.dest = normalizeDestFileDescriptor(dest.dest || process.stdout.fd);
@@ -28233,8 +28233,8 @@ var require_pino = __commonJS({
     module.exports.stdTimeFunctions = Object.assign({}, time4);
     module.exports.symbols = symbols;
     module.exports.version = version3;
-    module.exports.default = pino;
-    module.exports.pino = pino;
+    module.exports.default = pino2;
+    module.exports.pino = pino2;
   }
 });
 
@@ -28266,7 +28266,7 @@ var require_get_caller_file = __commonJS({
 var require_logger = __commonJS({
   "node_modules/.pnpm/pino-http@10.5.0/node_modules/pino-http/logger.js"(exports, module) {
     "use strict";
-    var { pino, symbols: { stringifySym, chindingsSym } } = require_pino();
+    var { pino: pino2, symbols: { stringifySym, chindingsSym } } = require_pino();
     var serializers = require_pino_std_serializers();
     var getCallerFile = require_get_caller_file();
     var startTime = /* @__PURE__ */ Symbol("startTime");
@@ -28444,7 +28444,7 @@ var require_logger = __commonJS({
         if (opts.transport && !opts.transport.caller) {
           opts.transport.caller = getCallerFile();
         }
-        logger2 = pino(opts, stream);
+        logger2 = pino2(opts, stream);
       }
       return logger2;
     }
@@ -37340,13 +37340,13 @@ var require_jsonwebtoken = __commonJS({
 });
 
 // artifacts/api-server/src/app.ts
-var import_express10 = __toESM(require_express2(), 1);
+var import_express11 = __toESM(require_express2(), 1);
 var import_cors = __toESM(require_lib3(), 1);
 var import_cookie_parser = __toESM(require_cookie_parser(), 1);
 var import_pino_http = __toESM(require_logger(), 1);
 
 // artifacts/api-server/src/routes/index.ts
-var import_express9 = __toESM(require_express2(), 1);
+var import_express10 = __toESM(require_express2(), 1);
 
 // artifacts/api-server/src/routes/health.ts
 var import_express = __toESM(require_express2(), 1);
@@ -41243,6 +41243,21 @@ var health_default = router;
 // artifacts/api-server/src/routes/posts.ts
 var import_express2 = __toESM(require_express2(), 1);
 
+// node_modules/.pnpm/pg@8.20.0/node_modules/pg/esm/index.mjs
+var import_lib = __toESM(require_lib5(), 1);
+var Client = import_lib.default.Client;
+var Pool = import_lib.default.Pool;
+var Connection = import_lib.default.Connection;
+var types = import_lib.default.types;
+var Query = import_lib.default.Query;
+var DatabaseError = import_lib.default.DatabaseError;
+var escapeIdentifier = import_lib.default.escapeIdentifier;
+var escapeLiteral = import_lib.default.escapeLiteral;
+var Result = import_lib.default.Result;
+var TypeOverrides = import_lib.default.TypeOverrides;
+var defaults = import_lib.default.defaults;
+var esm_default = import_lib.default;
+
 // node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/entity.js
 var entityKind = /* @__PURE__ */ Symbol.for("drizzle:entityKind");
 function is(value, type) {
@@ -41268,6 +41283,61 @@ function is(value, type) {
   }
   return false;
 }
+
+// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/logger.js
+var ConsoleLogWriter = class {
+  static [entityKind] = "ConsoleLogWriter";
+  write(message) {
+    console.log(message);
+  }
+};
+var DefaultLogger = class {
+  static [entityKind] = "DefaultLogger";
+  writer;
+  constructor(config2) {
+    this.writer = config2?.writer ?? new ConsoleLogWriter();
+  }
+  logQuery(query, params) {
+    const stringifiedParams = params.map((p) => {
+      try {
+        return JSON.stringify(p);
+      } catch {
+        return String(p);
+      }
+    });
+    const paramsStr = stringifiedParams.length ? ` -- params: [${stringifiedParams.join(", ")}]` : "";
+    this.writer.write(`Query: ${query}${paramsStr}`);
+  }
+};
+var NoopLogger = class {
+  static [entityKind] = "NoopLogger";
+  logQuery() {
+  }
+};
+
+// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/query-promise.js
+var QueryPromise = class {
+  static [entityKind] = "QueryPromise";
+  [Symbol.toStringTag] = "QueryPromise";
+  catch(onRejected) {
+    return this.then(void 0, onRejected);
+  }
+  finally(onFinally) {
+    return this.then(
+      (value) => {
+        onFinally?.();
+        return value;
+      },
+      (reason) => {
+        onFinally?.();
+        throw reason;
+      }
+    );
+  }
+  then(onFulfilled, onRejected) {
+    return this.execute().then(onFulfilled, onRejected);
+  }
+};
 
 // node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/column.js
 var Column = class {
@@ -42476,85 +42546,71 @@ function mapColumnsInSQLToAlias(query, alias) {
   }));
 }
 
-// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/errors.js
-var DrizzleError = class extends Error {
-  static [entityKind] = "DrizzleError";
-  constructor({ message, cause }) {
-    super(message);
-    this.name = "DrizzleError";
-    this.cause = cause;
-  }
-};
-var DrizzleQueryError = class _DrizzleQueryError extends Error {
-  constructor(query, params, cause) {
-    super(`Failed query: ${query}
-params: ${params}`);
-    this.query = query;
-    this.params = params;
-    this.cause = cause;
-    Error.captureStackTrace(this, _DrizzleQueryError);
-    if (cause) this.cause = cause;
-  }
-};
-var TransactionRollbackError = class extends DrizzleError {
-  static [entityKind] = "TransactionRollbackError";
-  constructor() {
-    super({ message: "Rollback" });
-  }
-};
-
-// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/logger.js
-var ConsoleLogWriter = class {
-  static [entityKind] = "ConsoleLogWriter";
-  write(message) {
-    console.log(message);
-  }
-};
-var DefaultLogger = class {
-  static [entityKind] = "DefaultLogger";
-  writer;
+// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/selection-proxy.js
+var SelectionProxyHandler = class _SelectionProxyHandler {
+  static [entityKind] = "SelectionProxyHandler";
+  config;
   constructor(config2) {
-    this.writer = config2?.writer ?? new ConsoleLogWriter();
+    this.config = { ...config2 };
   }
-  logQuery(query, params) {
-    const stringifiedParams = params.map((p) => {
-      try {
-        return JSON.stringify(p);
-      } catch {
-        return String(p);
+  get(subquery, prop) {
+    if (prop === "_") {
+      return {
+        ...subquery["_"],
+        selectedFields: new Proxy(
+          subquery._.selectedFields,
+          this
+        )
+      };
+    }
+    if (prop === ViewBaseConfig) {
+      return {
+        ...subquery[ViewBaseConfig],
+        selectedFields: new Proxy(
+          subquery[ViewBaseConfig].selectedFields,
+          this
+        )
+      };
+    }
+    if (typeof prop === "symbol") {
+      return subquery[prop];
+    }
+    const columns = is(subquery, Subquery) ? subquery._.selectedFields : is(subquery, View) ? subquery[ViewBaseConfig].selectedFields : subquery;
+    const value = columns[prop];
+    if (is(value, SQL.Aliased)) {
+      if (this.config.sqlAliasedBehavior === "sql" && !value.isSelectionField) {
+        return value.sql;
       }
-    });
-    const paramsStr = stringifiedParams.length ? ` -- params: [${stringifiedParams.join(", ")}]` : "";
-    this.writer.write(`Query: ${query}${paramsStr}`);
-  }
-};
-var NoopLogger = class {
-  static [entityKind] = "NoopLogger";
-  logQuery() {
-  }
-};
-
-// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/query-promise.js
-var QueryPromise = class {
-  static [entityKind] = "QueryPromise";
-  [Symbol.toStringTag] = "QueryPromise";
-  catch(onRejected) {
-    return this.then(void 0, onRejected);
-  }
-  finally(onFinally) {
-    return this.then(
-      (value) => {
-        onFinally?.();
+      const newValue = value.clone();
+      newValue.isSelectionField = true;
+      return newValue;
+    }
+    if (is(value, SQL)) {
+      if (this.config.sqlBehavior === "sql") {
         return value;
-      },
-      (reason) => {
-        onFinally?.();
-        throw reason;
       }
-    );
-  }
-  then(onFulfilled, onRejected) {
-    return this.execute().then(onFulfilled, onRejected);
+      throw new Error(
+        `You tried to reference "${prop}" field from a subquery, which is a raw SQL field, but it doesn't have an alias declared. Please add an alias to the field using ".as('alias')" method.`
+      );
+    }
+    if (is(value, Column)) {
+      if (this.config.alias) {
+        return new Proxy(
+          value,
+          new ColumnAliasProxyHandler(
+            new Proxy(
+              value.table,
+              new TableAliasProxyHandler(this.config.alias, this.config.replaceOriginalName ?? false)
+            )
+          )
+        );
+      }
+      return value;
+    }
+    if (typeof value !== "object" || value === null) {
+      return value;
+    }
+    return new Proxy(value, new _SelectionProxyHandler(this.config));
   }
 };
 
@@ -44154,6 +44210,85 @@ var PrimaryKey = class {
   }
 };
 
+// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/casing.js
+function toSnakeCase(input) {
+  const words = input.replace(/['\u2019]/g, "").match(/[\da-z]+|[A-Z]+(?![a-z])|[A-Z][\da-z]+/g) ?? [];
+  return words.map((word) => word.toLowerCase()).join("_");
+}
+function toCamelCase(input) {
+  const words = input.replace(/['\u2019]/g, "").match(/[\da-z]+|[A-Z]+(?![a-z])|[A-Z][\da-z]+/g) ?? [];
+  return words.reduce((acc, word, i) => {
+    const formattedWord = i === 0 ? word.toLowerCase() : `${word[0].toUpperCase()}${word.slice(1)}`;
+    return acc + formattedWord;
+  }, "");
+}
+function noopCase(input) {
+  return input;
+}
+var CasingCache = class {
+  static [entityKind] = "CasingCache";
+  /** @internal */
+  cache = {};
+  cachedTables = {};
+  convert;
+  constructor(casing) {
+    this.convert = casing === "snake_case" ? toSnakeCase : casing === "camelCase" ? toCamelCase : noopCase;
+  }
+  getColumnCasing(column) {
+    if (!column.keyAsName) return column.name;
+    const schema = column.table[Table.Symbol.Schema] ?? "public";
+    const tableName = column.table[Table.Symbol.OriginalName];
+    const key = `${schema}.${tableName}.${column.name}`;
+    if (!this.cache[key]) {
+      this.cacheTable(column.table);
+    }
+    return this.cache[key];
+  }
+  cacheTable(table) {
+    const schema = table[Table.Symbol.Schema] ?? "public";
+    const tableName = table[Table.Symbol.OriginalName];
+    const tableKey = `${schema}.${tableName}`;
+    if (!this.cachedTables[tableKey]) {
+      for (const column of Object.values(table[Table.Symbol.Columns])) {
+        const columnKey = `${tableKey}.${column.name}`;
+        this.cache[columnKey] = this.convert(column.name);
+      }
+      this.cachedTables[tableKey] = true;
+    }
+  }
+  clearCache() {
+    this.cache = {};
+    this.cachedTables = {};
+  }
+};
+
+// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/errors.js
+var DrizzleError = class extends Error {
+  static [entityKind] = "DrizzleError";
+  constructor({ message, cause }) {
+    super(message);
+    this.name = "DrizzleError";
+    this.cause = cause;
+  }
+};
+var DrizzleQueryError = class _DrizzleQueryError extends Error {
+  constructor(query, params, cause) {
+    super(`Failed query: ${query}
+params: ${params}`);
+    this.query = query;
+    this.params = params;
+    this.cause = cause;
+    Error.captureStackTrace(this, _DrizzleQueryError);
+    if (cause) this.cause = cause;
+  }
+};
+var TransactionRollbackError = class extends DrizzleError {
+  static [entityKind] = "TransactionRollbackError";
+  constructor() {
+    super({ message: "Rollback" });
+  }
+};
+
 // node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/sql/expressions/conditions.js
 function bindIfParam(value, column) {
   if (isDriverValueEncoder(column) && !isSQLWrapper(value) && !is(value, Param) && !is(value, Placeholder) && !is(value, Column) && !is(value, Table) && !is(value, View)) {
@@ -44537,141 +44672,6 @@ function mapRelationalRow(tablesConfig, tableConfig, row, buildQueryResultSelect
   }
   return result;
 }
-
-// node_modules/.pnpm/pg@8.20.0/node_modules/pg/esm/index.mjs
-var import_lib = __toESM(require_lib5(), 1);
-var Client = import_lib.default.Client;
-var Pool = import_lib.default.Pool;
-var Connection = import_lib.default.Connection;
-var types = import_lib.default.types;
-var Query = import_lib.default.Query;
-var DatabaseError = import_lib.default.DatabaseError;
-var escapeIdentifier = import_lib.default.escapeIdentifier;
-var escapeLiteral = import_lib.default.escapeLiteral;
-var Result = import_lib.default.Result;
-var TypeOverrides = import_lib.default.TypeOverrides;
-var defaults = import_lib.default.defaults;
-var esm_default = import_lib.default;
-
-// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/selection-proxy.js
-var SelectionProxyHandler = class _SelectionProxyHandler {
-  static [entityKind] = "SelectionProxyHandler";
-  config;
-  constructor(config2) {
-    this.config = { ...config2 };
-  }
-  get(subquery, prop) {
-    if (prop === "_") {
-      return {
-        ...subquery["_"],
-        selectedFields: new Proxy(
-          subquery._.selectedFields,
-          this
-        )
-      };
-    }
-    if (prop === ViewBaseConfig) {
-      return {
-        ...subquery[ViewBaseConfig],
-        selectedFields: new Proxy(
-          subquery[ViewBaseConfig].selectedFields,
-          this
-        )
-      };
-    }
-    if (typeof prop === "symbol") {
-      return subquery[prop];
-    }
-    const columns = is(subquery, Subquery) ? subquery._.selectedFields : is(subquery, View) ? subquery[ViewBaseConfig].selectedFields : subquery;
-    const value = columns[prop];
-    if (is(value, SQL.Aliased)) {
-      if (this.config.sqlAliasedBehavior === "sql" && !value.isSelectionField) {
-        return value.sql;
-      }
-      const newValue = value.clone();
-      newValue.isSelectionField = true;
-      return newValue;
-    }
-    if (is(value, SQL)) {
-      if (this.config.sqlBehavior === "sql") {
-        return value;
-      }
-      throw new Error(
-        `You tried to reference "${prop}" field from a subquery, which is a raw SQL field, but it doesn't have an alias declared. Please add an alias to the field using ".as('alias')" method.`
-      );
-    }
-    if (is(value, Column)) {
-      if (this.config.alias) {
-        return new Proxy(
-          value,
-          new ColumnAliasProxyHandler(
-            new Proxy(
-              value.table,
-              new TableAliasProxyHandler(this.config.alias, this.config.replaceOriginalName ?? false)
-            )
-          )
-        );
-      }
-      return value;
-    }
-    if (typeof value !== "object" || value === null) {
-      return value;
-    }
-    return new Proxy(value, new _SelectionProxyHandler(this.config));
-  }
-};
-
-// node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/casing.js
-function toSnakeCase(input) {
-  const words = input.replace(/['\u2019]/g, "").match(/[\da-z]+|[A-Z]+(?![a-z])|[A-Z][\da-z]+/g) ?? [];
-  return words.map((word) => word.toLowerCase()).join("_");
-}
-function toCamelCase(input) {
-  const words = input.replace(/['\u2019]/g, "").match(/[\da-z]+|[A-Z]+(?![a-z])|[A-Z][\da-z]+/g) ?? [];
-  return words.reduce((acc, word, i) => {
-    const formattedWord = i === 0 ? word.toLowerCase() : `${word[0].toUpperCase()}${word.slice(1)}`;
-    return acc + formattedWord;
-  }, "");
-}
-function noopCase(input) {
-  return input;
-}
-var CasingCache = class {
-  static [entityKind] = "CasingCache";
-  /** @internal */
-  cache = {};
-  cachedTables = {};
-  convert;
-  constructor(casing) {
-    this.convert = casing === "snake_case" ? toSnakeCase : casing === "camelCase" ? toCamelCase : noopCase;
-  }
-  getColumnCasing(column) {
-    if (!column.keyAsName) return column.name;
-    const schema = column.table[Table.Symbol.Schema] ?? "public";
-    const tableName = column.table[Table.Symbol.OriginalName];
-    const key = `${schema}.${tableName}.${column.name}`;
-    if (!this.cache[key]) {
-      this.cacheTable(column.table);
-    }
-    return this.cache[key];
-  }
-  cacheTable(table) {
-    const schema = table[Table.Symbol.Schema] ?? "public";
-    const tableName = table[Table.Symbol.OriginalName];
-    const tableKey = `${schema}.${tableName}`;
-    if (!this.cachedTables[tableKey]) {
-      for (const column of Object.values(table[Table.Symbol.Columns])) {
-        const columnKey = `${tableKey}.${column.name}`;
-        this.cache[columnKey] = this.convert(column.name);
-      }
-      this.cachedTables[tableKey] = true;
-    }
-  }
-  clearCache() {
-    this.cache = {};
-    this.cachedTables = {};
-  }
-};
 
 // node_modules/.pnpm/drizzle-orm@0.45.2_@types+pg@8.18.0_pg@8.20.0/node_modules/drizzle-orm/pg-core/view-base.js
 var PgViewBase = class extends View {
@@ -48215,17 +48215,14 @@ function drizzle(...params) {
 var schema_exports = {};
 __export(schema_exports, {
   blogPostsTable: () => blogPostsTable,
-  bucketListTable: () => bucketListTable,
   destinationsTable: () => destinationsTable,
   galleryPhotosTable: () => galleryPhotosTable,
   insertBlogPostSchema: () => insertBlogPostSchema,
-  insertBucketListSchema: () => insertBucketListSchema,
   insertDestinationSchema: () => insertDestinationSchema,
   insertGalleryPhotoSchema: () => insertGalleryPhotoSchema,
   insertNewsletterSubscriberSchema: () => insertNewsletterSubscriberSchema,
   newsletterSubscribersTable: () => newsletterSubscribersTable,
   updateBlogPostSchema: () => updateBlogPostSchema,
-  updateBucketListSchema: () => updateBucketListSchema,
   updateDestinationSchema: () => updateDestinationSchema
 });
 
@@ -59615,16 +59612,6 @@ var createInsertSchema = (entity, refine2) => {
   return handleColumns(columns, refine2 ?? {}, insertConditions);
 };
 
-// lib/db/src/schema/newsletter.ts
-var newsletterSubscribersTable = pgTable("newsletter_subscribers", {
-  id: serial("id").primaryKey(),
-  email: text("email").notNull().unique(),
-  createdAt: timestamp("created_at").defaultNow().notNull()
-});
-var insertNewsletterSubscriberSchema = createInsertSchema(
-  newsletterSubscribersTable
-).omit({ id: true, createdAt: true });
-
 // lib/db/src/schema/blog-posts.ts
 var blogPostsTable = pgTable("blog_posts", {
   id: serial("id").primaryKey(),
@@ -59679,33 +59666,43 @@ var insertGalleryPhotoSchema = createInsertSchema(galleryPhotosTable).omit({
   createdAt: true
 });
 
-// lib/db/src/schema/bucket-list.ts
-var bucketListTable = pgTable("bucket_list", {
+// lib/db/src/schema/newsletter.ts
+var newsletterSubscribersTable = pgTable("newsletter_subscribers", {
   id: serial("id").primaryKey(),
-  title: text("title").notNull(),
-  description: text("description").default(""),
-  imageUrl: text("image_url").default(""),
-  completed: boolean("completed").notNull().default(false),
+  email: text("email").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow().notNull()
 });
-var insertBucketListSchema = createInsertSchema(bucketListTable).omit({
+var insertNewsletterSubscriberSchema = createInsertSchema(newsletterSubscribersTable).omit({
   id: true,
   createdAt: true
 });
-var updateBucketListSchema = insertBucketListSchema.partial();
 
 // lib/db/src/index.ts
 var { Pool: Pool3 } = esm_default;
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?"
-  );
+var _pool = null;
+var _db = null;
+function getConnection() {
+  if (_db) return _db;
+  if (!process.env.DATABASE_URL) {
+    throw new Error(
+      "DATABASE_URL must be set. Did you forget to provision a database?"
+    );
+  }
+  _pool = new Pool3({ connectionString: process.env.DATABASE_URL });
+  _db = drizzle(_pool, { schema: schema_exports });
+  return _db;
 }
-var pool = new Pool3({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : void 0
+var db = new Proxy({}, {
+  get(_target, prop) {
+    return getConnection()[prop];
+  }
 });
-var db = drizzle(pool, { schema: schema_exports });
+var pool = new Proxy({}, {
+  get(_target, prop) {
+    if (!_pool) getConnection();
+    return _pool[prop];
+  }
+});
 
 // artifacts/api-server/src/routes/posts.ts
 var router2 = (0, import_express2.Router)();
@@ -59713,16 +59710,15 @@ router2.get("/", async (_req, res) => {
   try {
     const posts = await db.select().from(blogPostsTable).where(eq(blogPostsTable.published, true)).orderBy(desc(blogPostsTable.createdAt));
     res.json(posts);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 });
 router2.get("/:slug", async (req, res) => {
   try {
-    const rows = await db.select().from(blogPostsTable).where(eq(blogPostsTable.slug, req.params.slug)).limit(1);
-    const post = rows[0];
+    const [post] = await db.select().from(blogPostsTable).where(eq(blogPostsTable.slug, req.params.slug)).limit(1);
     if (!post || !post.published) {
-      res.status(404).json({ error: "Post not found" });
+      res.status(404).json({ error: "Not found" });
       return;
     }
     res.json(post);
@@ -59745,10 +59741,9 @@ router3.get("/", async (_req, res) => {
 });
 router3.get("/:slug", async (req, res) => {
   try {
-    const rows = await db.select().from(destinationsTable).where(eq(destinationsTable.slug, req.params.slug)).limit(1);
-    const dest = rows[0];
+    const [dest] = await db.select().from(destinationsTable).where(eq(destinationsTable.slug, req.params.slug)).limit(1);
     if (!dest || !dest.published) {
-      res.status(404).json({ error: "Destination not found" });
+      res.status(404).json({ error: "Not found" });
       return;
     }
     const photos = await db.select().from(galleryPhotosTable).where(eq(galleryPhotosTable.destinationId, dest.id)).orderBy(desc(galleryPhotosTable.createdAt));
@@ -59771,10 +59766,7 @@ router4.get("/", async (_req, res) => {
       createdAt: galleryPhotosTable.createdAt,
       destinationId: galleryPhotosTable.destinationId,
       destinationName: destinationsTable.name
-    }).from(galleryPhotosTable).leftJoin(
-      destinationsTable,
-      eq(galleryPhotosTable.destinationId, destinationsTable.id)
-    ).orderBy(desc(galleryPhotosTable.createdAt));
+    }).from(galleryPhotosTable).leftJoin(destinationsTable, eq(galleryPhotosTable.destinationId, destinationsTable.id)).orderBy(desc(galleryPhotosTable.createdAt));
     res.json(rows);
   } catch {
     res.status(500).json({ error: "Failed to fetch gallery" });
@@ -59782,8 +59774,26 @@ router4.get("/", async (_req, res) => {
 });
 var gallery_default = router4;
 
-// artifacts/api-server/src/routes/admin/auth.ts
+// artifacts/api-server/src/routes/newsletter.ts
 var import_express5 = __toESM(require_express2(), 1);
+var router5 = (0, import_express5.Router)();
+router5.post("/subscribe", async (req, res) => {
+  try {
+    const { email: email3 } = req.body;
+    if (!email3) {
+      res.status(400).json({ error: "email is required" });
+      return;
+    }
+    await db.insert(newsletterSubscribersTable).values({ email: email3 }).onConflictDoNothing();
+    res.json({ ok: true });
+  } catch {
+    res.status(500).json({ error: "Failed to subscribe" });
+  }
+});
+var newsletter_default = router5;
+
+// artifacts/api-server/src/routes/admin/auth.ts
+var import_express6 = __toESM(require_express2(), 1);
 
 // artifacts/api-server/src/lib/jwt.ts
 var import_jsonwebtoken = __toESM(require_jsonwebtoken(), 1);
@@ -59815,14 +59825,14 @@ function requireAdmin(req, res, next) {
 }
 
 // artifacts/api-server/src/routes/admin/auth.ts
-var router5 = (0, import_express5.Router)();
+var router6 = (0, import_express6.Router)();
 var COOKIE_OPTS = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: "strict",
   maxAge: 7 * 24 * 60 * 60 * 1e3
 };
-router5.post("/login", (req, res) => {
+router6.post("/login", (req, res) => {
   const { email: email3, password } = req.body;
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
   const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
@@ -59838,23 +59848,23 @@ router5.post("/login", (req, res) => {
   res.cookie("admin_token", token, COOKIE_OPTS);
   res.json({ ok: true, email: email3 });
 });
-router5.post("/logout", (_req, res) => {
+router6.post("/logout", (_req, res) => {
   res.clearCookie("admin_token");
   res.json({ ok: true });
 });
-router5.get("/me", requireAdmin, (req, res) => {
+router6.get("/me", requireAdmin, (req, res) => {
   res.json({ email: req.admin?.email });
 });
-var auth_default = router5;
+var auth_default = router6;
 
 // artifacts/api-server/src/routes/admin/posts.ts
-var import_express6 = __toESM(require_express2(), 1);
-var router6 = (0, import_express6.Router)();
-router6.use(requireAdmin);
+var import_express7 = __toESM(require_express2(), 1);
+var router7 = (0, import_express7.Router)();
+router7.use(requireAdmin);
 function toSlug(str) {
   return str.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-").replace(/-+/g, "-");
 }
-router6.get("/", async (_req, res) => {
+router7.get("/", async (_req, res) => {
   try {
     const posts = await db.select().from(blogPostsTable).orderBy(desc(blogPostsTable.createdAt));
     res.json(posts);
@@ -59862,7 +59872,7 @@ router6.get("/", async (_req, res) => {
     res.status(500).json({ error: "Failed to fetch posts" });
   }
 });
-router6.post("/", async (req, res) => {
+router7.post("/", async (req, res) => {
   try {
     const { title, content, excerpt, coverImageUrl, published } = req.body;
     if (!title) {
@@ -59884,13 +59894,11 @@ router6.post("/", async (req, res) => {
     res.status(500).json({ error: msg });
   }
 });
-router6.put("/:id", async (req, res) => {
+router7.put("/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     const { title, content, excerpt, coverImageUrl, published } = req.body;
-    const updates = {
-      updatedAt: /* @__PURE__ */ new Date()
-    };
+    const updates = { updatedAt: /* @__PURE__ */ new Date() };
     if (title !== void 0) {
       updates.title = title;
       updates.slug = toSlug(title);
@@ -59909,25 +59917,24 @@ router6.put("/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update post" });
   }
 });
-router6.delete("/:id", async (req, res) => {
+router7.delete("/:id", async (req, res) => {
   try {
-    const id = Number(req.params.id);
-    await db.delete(blogPostsTable).where(eq(blogPostsTable.id, id));
+    await db.delete(blogPostsTable).where(eq(blogPostsTable.id, Number(req.params.id)));
     res.status(204).send();
   } catch {
     res.status(500).json({ error: "Failed to delete post" });
   }
 });
-var posts_default2 = router6;
+var posts_default2 = router7;
 
 // artifacts/api-server/src/routes/admin/destinations.ts
-var import_express7 = __toESM(require_express2(), 1);
-var router7 = (0, import_express7.Router)();
-router7.use(requireAdmin);
+var import_express8 = __toESM(require_express2(), 1);
+var router8 = (0, import_express8.Router)();
+router8.use(requireAdmin);
 function toSlug2(str) {
   return str.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-").replace(/-+/g, "-");
 }
-router7.get("/", async (_req, res) => {
+router8.get("/", async (_req, res) => {
   try {
     const rows = await db.select().from(destinationsTable).orderBy(desc(destinationsTable.createdAt));
     res.json(rows);
@@ -59935,7 +59942,7 @@ router7.get("/", async (_req, res) => {
     res.status(500).json({ error: "Failed to fetch destinations" });
   }
 });
-router7.post("/", async (req, res) => {
+router8.post("/", async (req, res) => {
   try {
     const { name, region, description, coverImageUrl, bestTimeToVisit, published } = req.body;
     if (!name) {
@@ -59958,13 +59965,11 @@ router7.post("/", async (req, res) => {
     res.status(500).json({ error: msg });
   }
 });
-router7.put("/:id", async (req, res) => {
+router8.put("/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
     const { name, region, description, coverImageUrl, bestTimeToVisit, published } = req.body;
-    const updates = {
-      updatedAt: /* @__PURE__ */ new Date()
-    };
+    const updates = { updatedAt: /* @__PURE__ */ new Date() };
     if (name !== void 0) {
       updates.name = name;
       updates.slug = toSlug2(name);
@@ -59984,22 +59989,21 @@ router7.put("/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update destination" });
   }
 });
-router7.delete("/:id", async (req, res) => {
+router8.delete("/:id", async (req, res) => {
   try {
-    const id = Number(req.params.id);
-    await db.delete(destinationsTable).where(eq(destinationsTable.id, id));
+    await db.delete(destinationsTable).where(eq(destinationsTable.id, Number(req.params.id)));
     res.status(204).send();
   } catch {
     res.status(500).json({ error: "Failed to delete destination" });
   }
 });
-var destinations_default2 = router7;
+var destinations_default2 = router8;
 
 // artifacts/api-server/src/routes/admin/gallery.ts
-var import_express8 = __toESM(require_express2(), 1);
-var router8 = (0, import_express8.Router)();
-router8.use(requireAdmin);
-router8.get("/", async (_req, res) => {
+var import_express9 = __toESM(require_express2(), 1);
+var router9 = (0, import_express9.Router)();
+router9.use(requireAdmin);
+router9.get("/", async (_req, res) => {
   try {
     const rows = await db.select({
       id: galleryPhotosTable.id,
@@ -60008,16 +60012,13 @@ router8.get("/", async (_req, res) => {
       createdAt: galleryPhotosTable.createdAt,
       destinationId: galleryPhotosTable.destinationId,
       destinationName: destinationsTable.name
-    }).from(galleryPhotosTable).leftJoin(
-      destinationsTable,
-      eq(galleryPhotosTable.destinationId, destinationsTable.id)
-    ).orderBy(desc(galleryPhotosTable.createdAt));
+    }).from(galleryPhotosTable).leftJoin(destinationsTable, eq(galleryPhotosTable.destinationId, destinationsTable.id)).orderBy(desc(galleryPhotosTable.createdAt));
     res.json(rows);
   } catch {
     res.status(500).json({ error: "Failed to fetch gallery" });
   }
 });
-router8.post("/", async (req, res) => {
+router9.post("/", async (req, res) => {
   try {
     const { imageUrl, caption, destinationId } = req.body;
     if (!imageUrl) {
@@ -60034,43 +60035,49 @@ router8.post("/", async (req, res) => {
     res.status(500).json({ error: "Failed to add photo" });
   }
 });
-router8.delete("/:id", async (req, res) => {
+router9.delete("/:id", async (req, res) => {
   try {
-    const id = Number(req.params.id);
-    await db.delete(galleryPhotosTable).where(eq(galleryPhotosTable.id, id));
+    await db.delete(galleryPhotosTable).where(eq(galleryPhotosTable.id, Number(req.params.id)));
     res.status(204).send();
   } catch {
     res.status(500).json({ error: "Failed to delete photo" });
   }
 });
-var gallery_default2 = router8;
+var gallery_default2 = router9;
 
 // artifacts/api-server/src/routes/index.ts
-var router9 = (0, import_express9.Router)();
-router9.use(health_default);
-router9.use("/posts", posts_default);
-router9.use("/destinations", destinations_default);
-router9.use("/gallery", gallery_default);
-router9.use("/admin/auth", auth_default);
-router9.use("/admin/posts", posts_default2);
-router9.use("/admin/destinations", destinations_default2);
-router9.use("/admin/gallery", gallery_default2);
-var routes_default = router9;
+var router10 = (0, import_express10.Router)();
+router10.use(health_default);
+router10.use("/posts", posts_default);
+router10.use("/destinations", destinations_default);
+router10.use("/gallery", gallery_default);
+router10.use(newsletter_default);
+router10.use("/admin/auth", auth_default);
+router10.use("/admin/posts", posts_default2);
+router10.use("/admin/destinations", destinations_default2);
+router10.use("/admin/gallery", gallery_default2);
+var routes_default = router10;
 
 // artifacts/api-server/src/lib/logger.ts
+var import_pino = __toESM(require_pino(), 1);
 var isProduction = process.env.NODE_ENV === "production";
-var logger = {
-  info: (...args) => console.log("[INFO]", ...args),
-  error: (...args) => console.error("[ERROR]", ...args),
-  warn: (...args) => console.warn("[WARN]", ...args),
-  debug: (...args) => console.log("[DEBUG]", ...args),
-  fatal: (...args) => console.error("[FATAL]", ...args),
-  child: () => logger,
-  level: "info"
-};
+var logger = (0, import_pino.default)({
+  level: process.env.LOG_LEVEL ?? "info",
+  redact: [
+    "req.headers.authorization",
+    "req.headers.cookie",
+    "res.headers['set-cookie']"
+  ],
+  ...isProduction ? {} : {
+    transport: {
+      target: "pino-pretty",
+      options: { colorize: true }
+    }
+  }
+});
 
 // artifacts/api-server/src/app.ts
-var app = (0, import_express10.default)();
+var app = (0, import_express11.default)();
 app.use(
   (0, import_pino_http.default)({
     logger,
@@ -60090,10 +60097,10 @@ app.use(
     }
   })
 );
-app.use((0, import_cors.default)({ origin: true, credentials: true }));
+app.use((0, import_cors.default)());
 app.use((0, import_cookie_parser.default)());
-app.use(import_express10.default.json());
-app.use(import_express10.default.urlencoded({ extended: true }));
+app.use(import_express11.default.json());
+app.use(import_express11.default.urlencoded({ extended: true }));
 app.use("/api", routes_default);
 var app_default = app;
 export {

@@ -5,10 +5,6 @@
   "buildCommand": "node build-vercel.mjs",
   "outputDirectory": "artifacts/worldly-wander/dist/public",
   "framework": null,
-  "env": {
-    "PORT": "3000",
-    "BASE_PATH": "/"
-  },
   "functions": {
     "api/index.mjs": {
       "maxDuration": 30

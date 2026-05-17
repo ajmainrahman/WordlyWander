@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { eq, desc } from "drizzle-orm";
 import { db, galleryPhotosTable, destinationsTable } from "@workspace/db";
+import { eq, desc } from "drizzle-orm";
 import { requireAdmin } from "../../middlewares/auth";
 
 const router = Router();
@@ -18,10 +18,7 @@ router.get("/", async (_req, res) => {
         destinationName: destinationsTable.name,
       })
       .from(galleryPhotosTable)
-      .leftJoin(
-        destinationsTable,
-        eq(galleryPhotosTable.destinationId, destinationsTable.id)
-      )
+      .leftJoin(destinationsTable, eq(galleryPhotosTable.destinationId, destinationsTable.id))
       .orderBy(desc(galleryPhotosTable.createdAt));
     res.json(rows);
   } catch {
@@ -31,20 +28,13 @@ router.get("/", async (_req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { imageUrl, caption, destinationId } = req.body as {
-      imageUrl?: string;
-      caption?: string;
-      destinationId?: number | null;
-    };
+    const { imageUrl, caption, destinationId } = req.body;
     if (!imageUrl) { res.status(400).json({ error: "imageUrl is required" }); return; }
-    const [photo] = await db
-      .insert(galleryPhotosTable)
-      .values({
-        imageUrl,
-        caption: caption ?? "",
-        destinationId: destinationId ?? null,
-      })
-      .returning();
+    const [photo] = await db.insert(galleryPhotosTable).values({
+      imageUrl,
+      caption: caption ?? "",
+      destinationId: destinationId ?? null,
+    }).returning();
     res.status(201).json(photo);
   } catch {
     res.status(500).json({ error: "Failed to add photo" });
@@ -53,8 +43,7 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const id = Number(req.params.id);
-    await db.delete(galleryPhotosTable).where(eq(galleryPhotosTable.id, id));
+    await db.delete(galleryPhotosTable).where(eq(galleryPhotosTable.id, Number(req.params.id)));
     res.status(204).send();
   } catch {
     res.status(500).json({ error: "Failed to delete photo" });

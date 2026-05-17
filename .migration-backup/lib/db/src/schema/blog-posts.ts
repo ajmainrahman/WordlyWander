@@ -1,6 +1,5 @@
 import { pgTable, serial, text, boolean, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import { z } from "zod/v4";
 
 export const blogPostsTable = pgTable("blog_posts", {
   id: serial("id").primaryKey(),
@@ -19,9 +18,7 @@ export const insertBlogPostSchema = createInsertSchema(blogPostsTable).omit({
   createdAt: true,
   updatedAt: true,
 });
-
 export const updateBlogPostSchema = insertBlogPostSchema.partial();
 
-export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
-export type UpdateBlogPost = z.infer<typeof updateBlogPostSchema>;
 export type BlogPost = typeof blogPostsTable.$inferSelect;
+export type InsertBlogPost = typeof insertBlogPostSchema._type;

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Plus, Trash2, X } from "lucide-react";
+import { Plus, Trash2, X, Upload, Link as LinkIcon, Loader2 } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
-import { adminFetchGallery, adminFetchDestinations, adminAddPhoto, adminDeletePhoto, type GalleryPhoto } from "@/lib/api";
+import { adminFetchGallery, adminFetchDestinations, adminAddPhoto, adminDeletePhoto, uploadFileToStorage, type GalleryPhoto } from "@/lib/api";
 
 export default function AdminGallery() {
   const qc = useQueryClient();
@@ -11,7 +11,11 @@ export default function AdminGallery() {
 
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ imageUrl: "", caption: "", destinationId: "" });
+  const [uploadMode, setUploadMode] = useState<"url" | "file">("file");
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState("");
   const [deleteId, setDeleteId] = useState<number | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const invalidate = () => qc.invalidateQueries({ queryKey: ["admin", "gallery"] });
 
@@ -27,15 +31,30 @@ export default function AdminGallery() {
 
   const remove = useMutation({ mutationFn: adminDeletePhoto, onSuccess: () => { invalidate(); setDeleteId(null); } });
 
+  const handleFileUpload = async (file: File) => {
+    if (!file) return;
+    setUploading(true);
+    setUploadProgress("Uploading...");
+    try {
+      const url = await uploadFileToStorage(file);
+      setForm((f) => ({ ...f, imageUrl: url }));
+      setUploadProgress("Uploaded successfully!");
+    } catch (e) {
+      setUploadProgress("Upload failed. Try a URL instead.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="p-8" data-testid="page-admin-gallery">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="font-serif text-2xl font-bold text-foreground">Gallery</h2>
-            <p className="text-sm text-muted-foreground">{photos.length} photos</p>
+            <p className="text-sm text-muted-foreground">{photos.length} photos · Images are stored permanently in the cloud</p>
           </div>
-          <button data-testid="button-add-photo" onClick={() => setShowForm(true)}
+          <button data-testid="button-add-photo" onClick={() => { setShowForm(true); setUploadProgress(""); setForm({ imageUrl: "", caption: "", destinationId: "" }); }}
             className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">
             <Plus size={16} /> Add Photo
           </button>
@@ -48,11 +67,64 @@ export default function AdminGallery() {
               <h3 className="font-semibold text-foreground">Add New Photo</h3>
               <button onClick={() => setShowForm(false)} className="p-1.5 hover:bg-muted rounded-md"><X size={16} /></button>
             </div>
+
+            {/* Upload mode toggle */}
+            <div className="flex gap-2 mb-4">
+              <button
+                onClick={() => { setUploadMode("file"); setForm((f) => ({ ...f, imageUrl: "" })); setUploadProgress(""); }}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${uploadMode === "file" ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:text-foreground"}`}
+              >
+                <Upload size={12} /> Upload File
+              </button>
+              <button
+                onClick={() => { setUploadMode("url"); setForm((f) => ({ ...f, imageUrl: "" })); setUploadProgress(""); }}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors ${uploadMode === "url" ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:text-foreground"}`}
+              >
+                <LinkIcon size={12} /> Paste URL
+              </button>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-foreground mb-1.5">Image URL <span className="text-destructive">*</span></label>
-                <input value={form.imageUrl} onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
-                  data-testid="input-photo-url" placeholder="https://drive.google.com/..." className={inputCls} />
+                {uploadMode === "file" ? (
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Upload Image <span className="text-green-600 text-xs font-normal">(stored permanently — no expiry)</span></label>
+                    <div
+                      onClick={() => fileRef.current?.click()}
+                      className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 transition-colors"
+                    >
+                      {uploading ? (
+                        <div className="flex flex-col items-center gap-2">
+                          <Loader2 size={24} className="animate-spin text-primary" />
+                          <p className="text-sm text-muted-foreground">Uploading to cloud...</p>
+                        </div>
+                      ) : form.imageUrl ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <p className="text-sm text-green-600 font-medium">✓ {uploadProgress || "File uploaded"}</p>
+                          <p className="text-xs text-muted-foreground">Click to replace</p>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-2">
+                          <Upload size={24} className="text-muted-foreground/50" />
+                          <p className="text-sm text-muted-foreground">Click to choose a photo from your device</p>
+                          <p className="text-xs text-muted-foreground/60">JPG, PNG, WebP up to 10MB</p>
+                        </div>
+                      )}
+                    </div>
+                    <input ref={fileRef} type="file" accept="image/*" className="hidden"
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileUpload(f); }} />
+                    {uploadProgress && !uploading && (
+                      <p className={`text-xs mt-1.5 ${uploadProgress.includes("failed") ? "text-destructive" : "text-green-600"}`}>{uploadProgress}</p>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Image URL <span className="text-destructive">*</span></label>
+                    <input value={form.imageUrl} onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
+                      data-testid="input-photo-url" placeholder="https://..." className={inputCls} />
+                    <p className="text-xs text-amber-600 mt-1">Note: External URLs may expire. Use file upload for permanent storage.</p>
+                  </div>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Caption</label>
@@ -70,13 +142,14 @@ export default function AdminGallery() {
                 </select>
               </div>
             </div>
+
             {form.imageUrl && (
               <div className="mt-4">
                 <img src={form.imageUrl} alt="preview" className="h-40 w-full object-cover rounded-lg border border-border" />
               </div>
             )}
             <div className="flex gap-3 mt-4">
-              <button data-testid="button-save-photo" onClick={() => add.mutate()} disabled={!form.imageUrl || add.isPending}
+              <button data-testid="button-save-photo" onClick={() => add.mutate()} disabled={!form.imageUrl || add.isPending || uploading}
                 className="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 disabled:opacity-60 transition-colors">
                 {add.isPending ? "Adding..." : "Add Photo"}
               </button>
@@ -91,7 +164,7 @@ export default function AdminGallery() {
           <div className="text-muted-foreground text-sm">Loading...</div>
         ) : photos.length === 0 ? (
           <div className="text-center py-20 text-muted-foreground" data-testid="text-no-photos">
-            <p>No photos yet. Add your first one.</p>
+            <p>No photos yet. Add your first one using the upload button above.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" data-testid="grid-photos">

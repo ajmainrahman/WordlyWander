@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { eq, desc } from "drizzle-orm";
 import { db, galleryPhotosTable, destinationsTable } from "@workspace/db";
+import { eq, desc } from "drizzle-orm";
 
 const router = Router();
 
@@ -16,10 +16,7 @@ router.get("/", async (_req, res) => {
         destinationName: destinationsTable.name,
       })
       .from(galleryPhotosTable)
-      .leftJoin(
-        destinationsTable,
-        eq(galleryPhotosTable.destinationId, destinationsTable.id)
-      )
+      .leftJoin(destinationsTable, eq(galleryPhotosTable.destinationId, destinationsTable.id))
       .orderBy(desc(galleryPhotosTable.createdAt));
     res.json(rows);
   } catch {
