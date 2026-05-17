@@ -20,6 +20,6 @@ await build({
 
 // Verify export exists
 const { readFileSync } = await import("fs");
-const bundle = readFileSync("api/index.mjs", "utf8");
-const hasExport = bundle.includes("export default");
+const bundle = readFileSync("api/index.js", "utf8");
+const hasExport = bundle.includes("module.exports");
 console.log(hasExport ? "✅ export default found" : "❌ WARNING: no export default!");
