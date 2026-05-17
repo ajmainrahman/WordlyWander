@@ -12,7 +12,7 @@ await build({
   bundle: true,
   platform: "node",
   target: "node20",
-  format: "esm",
+  format: "cjs",
   outfile: "api/index.mjs",
   external: ["pg-native", "@google-cloud/storage"],
   sourcemap: false,
