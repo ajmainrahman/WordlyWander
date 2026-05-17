@@ -1,11 +1,29 @@
+const ADMIN_TOKEN_KEY = "ww_admin_token";
+
+export function getAdminToken(): string | null {
+  return localStorage.getItem(ADMIN_TOKEN_KEY);
+}
+export function setAdminToken(token: string): void {
+  localStorage.setItem(ADMIN_TOKEN_KEY, token);
+}
+export function clearAdminToken(): void {
+  localStorage.removeItem(ADMIN_TOKEN_KEY);
+}
+
 export async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
+  const token = getAdminToken();
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options?.headers as Record<string, string> ?? {}),
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(path, {
     ...options,
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(options?.headers ?? {}),
-    },
+    headers,
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ error: res.statusText }));
@@ -13,6 +31,29 @@ export async function apiFetch<T>(path: string, options?: RequestInit): Promise<
   }
   if (res.status === 204) return undefined as T;
   return res.json() as Promise<T>;
+}
+
+// ─── Google Drive URL converter ───────────────────────────────────────────────
+
+export function convertGoogleDriveUrl(url: string): string {
+  if (!url) return url;
+
+  const driveFileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (driveFileMatch) {
+    return `https://lh3.googleusercontent.com/d/${driveFileMatch[1]}`;
+  }
+
+  const driveOpenMatch = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
+  if (driveOpenMatch) {
+    return `https://lh3.googleusercontent.com/d/${driveOpenMatch[1]}`;
+  }
+
+  const driveUcMatch = url.match(/drive\.google\.com\/uc\?.*id=([a-zA-Z0-9_-]+)/);
+  if (driveUcMatch) {
+    return `https://lh3.googleusercontent.com/d/${driveUcMatch[1]}`;
+  }
+
+  return url;
 }
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -95,7 +136,7 @@ export const adminFetchBucketList = () => apiFetch<BucketListItem[]>("/api/admin
 export const adminFetchSiteSettings = () => apiFetch<Record<string, string>>("/api/admin/site-settings");
 
 export const adminLogin = (email: string, password: string) =>
-  apiFetch<{ ok: boolean; email: string }>("/api/admin/auth/login", {
+  apiFetch<{ ok: boolean; email: string; token: string }>("/api/admin/auth/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });

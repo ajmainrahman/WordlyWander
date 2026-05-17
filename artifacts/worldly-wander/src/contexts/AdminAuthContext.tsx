@@ -1,5 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { adminLogin as apiLogin, adminLogout as apiLogout, adminMe } from "@/lib/api";
+import {
+  adminLogin as apiLogin,
+  adminLogout as apiLogout,
+  adminMe,
+  getAdminToken,
+  setAdminToken,
+  clearAdminToken,
+} from "@/lib/api";
 
 interface AdminUser { email: string; }
 
@@ -22,19 +29,31 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const token = getAdminToken();
+    if (!token) {
+      setLoading(false);
+      return;
+    }
     adminMe()
       .then((u) => setUser(u))
-      .catch(() => setUser(null))
+      .catch(() => {
+        clearAdminToken();
+        setUser(null);
+      })
       .finally(() => setLoading(false));
   }, []);
 
   const login = async (email: string, password: string) => {
     const res = await apiLogin(email, password);
+    if (res.token) {
+      setAdminToken(res.token);
+    }
     setUser({ email: res.email });
   };
 
   const logout = async () => {
-    await apiLogout();
+    try { await apiLogout(); } catch { }
+    clearAdminToken();
     setUser(null);
   };
 

@@ -26,11 +26,11 @@ router.post("/login", (req, res) => {
   }
   const token = signAdminToken({ sub: "admin", email });
   res.cookie("admin_token", token, COOKIE_OPTS);
-  res.json({ ok: true, email });
+  res.json({ ok: true, email, token });
 });
 
 router.post("/logout", (_req, res) => {
-  res.clearCookie("admin_token");
+  res.clearCookie("admin_token", { path: "/" });
   res.json({ ok: true });
 });
 

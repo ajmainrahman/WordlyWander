@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Trash2, X, Upload, Link as LinkIcon, Loader2 } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
-import { adminFetchGallery, adminFetchDestinations, adminAddPhoto, adminDeletePhoto, uploadFileToStorage, type GalleryPhoto } from "@/lib/api";
+import { adminFetchGallery, adminFetchDestinations, adminAddPhoto, adminDeletePhoto, uploadFileToStorage, convertGoogleDriveUrl, type GalleryPhoto } from "@/lib/api";
 
 export default function AdminGallery() {
   const qc = useQueryClient();
@@ -120,9 +120,19 @@ export default function AdminGallery() {
                 ) : (
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">Image URL <span className="text-destructive">*</span></label>
-                    <input value={form.imageUrl} onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
-                      data-testid="input-photo-url" placeholder="https://..." className={inputCls} />
-                    <p className="text-xs text-amber-600 mt-1">Note: External URLs may expire. Use file upload for permanent storage.</p>
+                    <input
+                      value={form.imageUrl}
+                      onChange={(e) => {
+                        const converted = convertGoogleDriveUrl(e.target.value.trim());
+                        setForm((f) => ({ ...f, imageUrl: converted }));
+                      }}
+                      data-testid="input-photo-url"
+                      placeholder="https://... or Google Drive share link"
+                      className={inputCls}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Google Drive share links are automatically converted. For permanent storage, use file upload.
+                    </p>
                   </div>
                 )}
               </div>
