@@ -8,7 +8,7 @@ execSync("pnpm --filter @workspace/worldly-wander run build", { stdio: "inherit"
 console.log("⚙️  Bundling API for Vercel...");
 mkdirSync("api", { recursive: true });
 await build({
-  entryPoints: ["artifacts/api-server/src/app.ts"],
+  entryPoints: ["artifacts/api-server/src/app-vercel.ts"],
   bundle: true,
   platform: "node",
   target: "node20",
