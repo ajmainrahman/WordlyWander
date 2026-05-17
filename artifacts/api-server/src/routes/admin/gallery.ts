@@ -41,6 +41,25 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const { imageUrl, caption, destinationId } = req.body;
+    const updates: Record<string, unknown> = {};
+    if (imageUrl !== undefined) updates.imageUrl = imageUrl;
+    if (caption !== undefined) updates.caption = caption;
+    if (destinationId !== undefined) updates.destinationId = destinationId === "" ? null : destinationId;
+    const [photo] = await db
+      .update(galleryPhotosTable)
+      .set(updates)
+      .where(eq(galleryPhotosTable.id, Number(req.params.id)))
+      .returning();
+    if (!photo) { res.status(404).json({ error: "Photo not found" }); return; }
+    res.json(photo);
+  } catch {
+    res.status(500).json({ error: "Failed to update photo" });
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     await db.delete(galleryPhotosTable).where(eq(galleryPhotosTable.id, Number(req.params.id)));

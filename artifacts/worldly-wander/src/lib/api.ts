@@ -168,6 +168,9 @@ export const adminDeleteDestination = (id: number) =>
 export const adminAddPhoto = (data: { imageUrl: string; caption?: string; destinationId?: number | null }) =>
   apiFetch<GalleryPhoto>("/api/admin/gallery", { method: "POST", body: JSON.stringify(data) });
 
+export const adminUpdatePhoto = (id: number, data: { imageUrl?: string; caption?: string; destinationId?: number | null }) =>
+  apiFetch<GalleryPhoto>(`/api/admin/gallery/${id}`, { method: "PUT", body: JSON.stringify(data) });
+
 export const adminDeletePhoto = (id: number) =>
   apiFetch<void>(`/api/admin/gallery/${id}`, { method: "DELETE" });
 
