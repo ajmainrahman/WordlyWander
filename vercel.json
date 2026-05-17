@@ -5,11 +5,6 @@
   "buildCommand": "node build-vercel.mjs",
   "outputDirectory": "artifacts/worldly-wander/dist/public",
   "framework": null,
-  "functions": {
-    "api/index.js": {
-      "maxDuration": 30
-    }
-  },
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
