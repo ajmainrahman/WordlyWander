@@ -47,7 +47,7 @@ export default function Navbar() {
           <Link href="/" data-testid="link-logo">
             <div className="flex items-center gap-2.5 cursor-pointer">
               <img
-                src="/logo-couple.png"
+                src="/logo.png"
                 alt="WordlyWander"
                 className="w-9 h-9 object-contain"
               />
