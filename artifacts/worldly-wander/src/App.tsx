@@ -25,7 +25,17 @@ import AdminBucketList from "@/pages/admin/BucketList";
 import AdminSiteSettings from "@/pages/admin/SiteSettings";
 import NotFound from "@/pages/not-found";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: (failureCount, error) => {
+        if (error instanceof Error && error.message === "Unauthorized") return false;
+        return failureCount < 2;
+      },
+      staleTime: 30_000,
+    },
+  },
+});
 
 function AdminGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAdminAuth();
